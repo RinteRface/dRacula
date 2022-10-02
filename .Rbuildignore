@@ -1,0 +1,9 @@
+^dRacula\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^cran-comments\.md$
+^CODE_OF_CONDUCT\.md$
+^srcjs$
+^node_modules$
+^package\.json$
+^package-lock\.json$
