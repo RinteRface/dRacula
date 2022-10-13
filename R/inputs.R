@@ -39,9 +39,51 @@ dracula_checkbox <- function(inputId, label, value = FALSE, width = NULL,
       checked = if (value) NA else NULL
     ),
     tags$label(
-      `for` = "normal",
+      `for` = inputId,
       class = sprintf("drac-text drac-text-%s", textColor),
       label
     )
   )
+}
+
+
+#' Dracula switch
+#'
+#' Similar to checkbox but with
+#' a toggle widget.
+#'
+#' @inheritParams dracula_checkbox
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(dRacula)
+
+#'  ui <- dracula_page(
+#'    dracula_switch("switch", "My switch input", color = "pink")
+#'  )
+#'  server <- function(input, output, session) {
+#'    observe({
+#'     print(input$switch)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#' }
+dracula_switch <- function(inputId, label, value = FALSE,
+                           color = "purple", textColor = "white",
+                           disabled = FALSE) {
+  tag <- dracula_checkbox(
+    inputId,
+    label,
+    value,
+    color = color,
+    textColor = textColor,
+    disabled = disabled
+  )
+
+  tagQuery(tag)$
+    find("input")$
+    addClass("drac-switch")$
+    allTags()
 }

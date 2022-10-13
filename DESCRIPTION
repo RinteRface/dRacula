@@ -7,7 +7,7 @@ Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Imports: 
     bslib,
-    htmltools,
+    htmltools (>= 0.5.3),
     shiny,
     utils
 Encoding: UTF-8
