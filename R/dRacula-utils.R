@@ -229,3 +229,25 @@ findAttribute <- function(x, attr, val) {
 
   return(FALSE) # found no attribute called `attr`
 }
+
+dracula_colors <- c(
+  "purple-cyan",
+  "yellow-pink",
+  "cyan-green",
+  "pink-purple",
+  "cyan",
+  "green",
+  "orange",
+  "pink",
+  "purple",
+  "red",
+  "yellow",
+  "white",
+  "black",
+  "black-secondary",
+  "black-light"
+)
+
+validate_dracula_color <- function(color) {
+  stopifnot(color %in% dracula_colors)
+}

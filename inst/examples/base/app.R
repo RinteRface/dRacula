@@ -18,20 +18,7 @@ ui <- dracula_page(
 </div>
       '
     ),
-    HTML(
-      '<div class="drac-box">
-  <input
-    type="checkbox"
-    name="normal"
-    id="normal"
-    class="drac-checkbox drac-checkbox-purple"
-    checked=""
-  /><label for="normal" class="drac-text drac-text-white"
-    >Enjoys the light</label
-  >
-</div>
-      '
-    ),
+    dracula_checkbox("checkbox", "My checkbox", color = "pink"),
     HTML(
       '<input
     placeholder="Number"
@@ -115,7 +102,7 @@ ui <- dracula_page(
 
 server <- function(input, output, session) {
   observe({
-    print(input$normal)
+    print(input$checkbox)
     print(input$numeric)
     print(input$mytext)
     print(input$slider)

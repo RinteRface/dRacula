@@ -9,7 +9,7 @@
 #' @export
 dracula_page <- function(...) {
   add_dependencies(
-    fluidPage(
+    shiny::fluidPage(
       # dracula white/black colors
       theme = bslib::bs_theme(
         version = 5,
