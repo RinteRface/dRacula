@@ -6,8 +6,8 @@
 #'
 #' @importFrom htmltools tagList htmlDependency
 #' @export
-add_dracula_ui_deps <- function(tag) {
- dracula_ui_deps <- htmlDependency(
+add_dracula_deps <- function(tag) {
+ dracula_deps <- htmlDependency(
   name = "dracula-ui",
   version = "1.0.1",
   src = c(file = "dracula-ui-1.0.1"),
@@ -15,6 +15,6 @@ add_dracula_ui_deps <- function(tag) {
   stylesheet = "css/dracula-ui.min.css",
   package = "dRacula",
  )
- tagList(tag, dracula_ui_deps)
+ tagList(tag, dracula_deps)
 }
 
