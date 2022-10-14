@@ -50,7 +50,7 @@ if (interactive()) {
     "text",
     "My text input",
     "Hello World",
-    color = "pink"
+    color = "orange"
    )
  )
  server <- function(input, output, session) {

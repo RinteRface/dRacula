@@ -208,3 +208,75 @@ dracula_text <- function(inputId, label, value = "",
   )
 }
 
+#' Dracula action button
+#'
+#' @inheritParams shiny::actionButton
+#' @inheritParams dracula_checkbox
+#' @param ghost Ghost style.
+#'
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(dRacula)
+
+#'  ui <- dracula_page(
+#'    dracula_button(
+#'     "btn",
+#'     "My action button",
+#'     color = "animated"
+#'    )
+#'  )
+#'  server <- function(input, output, session) {
+#'    observe({
+#'     print(input$btn)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#' }
+dracula_button <- function(inputId, label, icon = NULL,
+                           width = NULL, ..., color = "purple",
+                           textColor = "black",
+                           disabled = FALSE, outline = FALSE,
+                           ghost = FALSE, size = "md") {
+
+  if (outline && ghost) {
+    stop("Chose either outlined or ghost")
+  }
+
+  color_cl <- if (!ghost) {
+    sprintf("drac-bg-%s", color)
+  } else {
+    sprintf("drac-bg-%s-transparent", color)
+  }
+
+  btn_cl <- sprintf(
+    "action-button drac-btn %s drac-m-%s drac-text-%s",
+    color_cl,
+    size,
+    textColor
+  )
+
+  if (outline) {
+    btn_cl <- sprintf(
+      "%s drac-btn-outline",
+      btn_cl
+    )
+  }
+  if (ghost) {
+    btn_cl <- sprintf(
+      "%s drac-btn-ghost",
+      btn_cl
+    )
+  }
+
+  tags$button(
+    id = inputId,
+    icon = icon,
+    class = btn_cl,
+    label,
+    disabled = if (disabled) "" else NULL
+  )
+}
+

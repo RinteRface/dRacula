@@ -242,6 +242,7 @@ dracula_basic_colors <- c(
 )
 
 dracula_gradient_colors <- c(
+  "animated",
   "purple-cyan",
   "yellow-pink",
   "cyan-green",
