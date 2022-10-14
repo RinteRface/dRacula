@@ -190,10 +190,10 @@ dracula_switch <- function(inputId, label, value = FALSE,
 #'  shinyApp(ui, server)
 #' }
 dracula_text_input <- function(inputId, label, value = "",
-                         width = NULL, placeholder = NULL,
-                         color = "white", textColor = "white",
-                         size = "md", outline = FALSE,
-                         borderSize = "lg") {
+                               width = NULL, placeholder = NULL,
+                               color = "white", textColor = "white",
+                               size = "md", outline = FALSE,
+                               borderSize = "lg") {
   dracula_input(
     inputId,
     label,
@@ -343,5 +343,121 @@ dracula_numeric <- function(
       step = if (!is.na(step)) step
     )$
     allTags()
+}
+
+dracula_select_arrow <- function(color) {
+  tags$div(
+    class = sprintf(
+      "drac-select-arrow drac-text-%s",
+      color
+    ),
+    tags$svg(
+      viewbox = "0 0 24 24",
+      focusable = "false",
+      role = "presentation",
+      `aria-hidden` = "true",
+      tags$path(
+        fill = "currentColor",
+        d = "M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+      )
+    )
+  )
+}
+
+#' Dracula select input
+#'
+#' @inheritParams shiny::selectInput
+#' @inheritParams dracula_input
+#'
+#' @seealso \url{https://ui.draculatheme.com/select}.
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(dRacula)
+#'  ui <- dracula_page(
+#'    dracula_select(
+#'     "select",
+#'     "My select input",
+#'     colnames(mtcars)
+#'    )
+#'  )
+#'  server <- function(input, output, session) {
+#'    observe({
+#'     print(input$select)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#' }
+dracula_select <- function(
+    inputId,
+    label,
+    choices,
+    selected = NULL,
+    multiple = FALSE,
+    selectize = TRUE,
+    width = NULL,
+    color = "white",
+    textColor = "white",
+    size = "md",
+    disabled = FALSE,
+    outline = FALSE
+) {
+  select_tag <- selectInput(
+    inputId,
+    label,
+    choices,
+    selected,
+    multiple,
+    selectize,
+    width,
+    size = NULL
+  )
+
+  # Get select tag + selectize script
+  select_tag <- tagQuery(select_tag)$
+    find("select")$
+    parent("div")$
+    children()$
+    selectedTags()
+
+  # Modify select element
+  select_tag[[1]]$attribs$class <- sprintf(
+    "drac-select drac-select-%s
+    drac-select-%s",
+    color,
+    size
+  )
+
+  if (outline) {
+    select_tag[[1]]$attribs$class <- paste(
+      select_tag[[1]]$attribs$class,
+      "drac-select-outline"
+    )
+  }
+
+  if (disabled) {
+    select_tag[[1]]$attribs$disabled <- ""
+  }
+
+  # Add custom arrow
+  select_tag[[1]] <- tags$div(
+    style = "position: relative",
+    select_tag[[1]],
+    dracula_select_arrow(color)
+  )
+
+  new_label <- tags$label(
+    `for` = inputId,
+    class = sprintf("drac-text drac-text-%s", textColor),
+    label
+  )
+
+  tags$div(
+    class = "drac-box",
+    new_label,
+    tagList(select_tag)
+  )
 }
 

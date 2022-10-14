@@ -88,19 +88,13 @@ ui <- dracula_page(
 </div>
       '
   ),
-HTML(
-  '<div class="drac-box"><select class="drac-select drac-select-white" id="myselect">
-        <option value="default" disabled="" selected="">Select option</option>
-        <option>Blade</option>
-        <option>Buffy</option>
-        <option>Lincoln</option>
-        <option>Morbius</option>
-        <option>Van Helsing</option>
-      </select></div>
-      '
-),
-dracula_switch("switch", "My switch input", color = "pink"),
-HTML(
+  dracula_select(
+    "select",
+    "My select input",
+    colnames(mtcars)
+  ),
+  dracula_switch("switch", "My switch input", color = "pink"),
+  HTML(
   '<ul class="drac-tabs drac-tabs-white">
   <li class="drac-tab drac-tab-active">
     <a class="drac-tab-link drac-text" href="#">Item One</a>
@@ -112,7 +106,7 @@ HTML(
     <a class="drac-tab-link drac-text" href="#">Item Three</a>
   </li>
 </ul>'
-)
+  )
 )
 
 
@@ -124,7 +118,7 @@ server <- function(input, output, session) {
     print(input$slider)
     print(input$btn)
     print(input$radio)
-    print(input$myselect)
+    print(input$select)
     print(input$switch)
   })
 }

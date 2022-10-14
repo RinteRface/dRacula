@@ -6,7 +6,7 @@
 \usage{
 dracula_link(
   ...,
-  href = "#",
+  href,
   color = "white",
   weight = "normal",
   size = "md",
