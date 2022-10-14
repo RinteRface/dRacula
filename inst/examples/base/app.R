@@ -76,17 +76,12 @@ ui <- dracula_page(
     "My action button",
     color = "animated"
   ),
-  HTML(
-    '<div class="drac-box">
-  <input
-    type="radio"
-    name="normal"
-    id="radio"
-    class="drac-radio drac-radio-purple"
-    checked=""
-  /><label for="normal" class="drac-text drac-text-white">Likes Garlic</label>
-</div>
-      '
+  dracula_radio(
+    "radio",
+    "My radio input",
+    color = "pink",
+    textColor = "yellow",
+    colnames(mtcars)
   ),
   dracula_select(
     "select",

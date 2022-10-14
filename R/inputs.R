@@ -461,3 +461,100 @@ dracula_select <- function(
   )
 }
 
+#' Dracula radio button
+#'
+#' @inheritParams shiny::radioButtons
+#' @inheritParams dracula_input
+#'
+#' @seealso \url{https://ui.draculatheme.com/radio}.
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(dRacula)
+#'  ui <- dracula_page(
+#'    dracula_radio(
+#'     "radio",
+#'     "My radio input",
+#'     colnames(mtcars)
+#'    )
+#'  )
+#'  server <- function(input, output, session) {
+#'    observe({
+#'     print(input$radio)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#' }
+dracula_radio <- function(
+    inputId,
+    label,
+    choices = NULL,
+    selected = NULL,
+    inline = FALSE,
+    width = NULL,
+    choiceNames = NULL,
+    choiceValues = NULL,
+    color = "purple",
+    textColor = "white",
+    size = "xs",
+    disabled = FALSE
+) {
+  radio_tag <- radioButtons(
+    inputId,
+    label,
+    choices,
+    selected,
+    inline,
+    width,
+    choiceNames,
+    choiceValues
+  )
+
+  tagQuery(radio_tag)$
+    each(function(tag, index) {
+      tag$children[[2]] <- tag$children[[2]]$children
+      tag
+    })$
+    addClass("drac-box")$
+    removeClass("form-group shiny-input-container")$
+    removeAttrs(c("aria-labelledby", "role"))$
+    find(".shiny-options-group")$
+    removeClass("shiny-options-group")$
+    reset()$
+    find("label")$
+    removeClass("control-label")$
+    addClass(
+      sprintf(
+        "drac-text drac-text-%s",
+        textColor
+      )
+    )$
+    reset()$
+    find(".radio")$
+    removeClass("radio")$
+    addClass(sprintf("drac-box drac-m-%s", size))$
+    each(function(tag, index) {
+      tag$children <- tag$children[[1]]$children
+      tag
+    })$
+    find("input")$
+    each(function(tag, index) {
+      tag$attribs$class <- sprintf(
+        "drac-radio drac-radio-%s",
+        color
+      )
+    })$
+    reset()$
+    find("span")$
+    each(function(tag, index) {
+      tag$name <- "label"
+      tag$attribs$class <- sprintf(
+        "drac-text drac-text-%s",
+        textColor
+      )
+    })$
+    allTags()
+}
+
