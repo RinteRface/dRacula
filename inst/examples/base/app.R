@@ -4,19 +4,14 @@ ui <- dracula_page(
     HTML(
       '<h1 class="drac-heading drac-heading-2xl drac-text-white">h1</h1>'
     ),
-    HTML('<div class="drac-box drac-card drac-bg-purple-cyan drac-p-sm">
-  <span class="drac-text drac-line-height drac-text-black">Dracula</span>
-</div>'),
-    HTML(
-      '<div>
-  <div
-    variant="subtle"
-    class="drac-box drac-card drac-card-subtle drac-border-pink drac-bg-pink drac-p-md drac-m-md"
-  >
-    <span class="drac-text drac-line-height drac-text-pink">Subtle Card</span>
-  </div>
-</div>
-      '
+    dracula_card(
+      "My first card"
+    ),
+    dracula_card(
+      "My second card",
+      color = "yellow",
+      borderColor = "yellow",
+      variant = TRUE
     ),
     dracula_checkbox("checkbox", "My checkbox", color = "pink"),
     dracula_numeric(
