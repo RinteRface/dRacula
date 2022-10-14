@@ -24,17 +24,15 @@ ui <- dracula_page(
     placeholder="Number"
     type="number"
     id="numeric"
-    class="drac-input drac-input-orange drac-text-orange drac-my-sm"
+    class="drac-input drac-input-cyan-green drac-text-orange drac-my-sm"
   />
       '
     ),
-    HTML(
-      '<input
-    placeholder="green"
-    type="text"
-    id="mytext"
-    class="drac-input drac-input-green drac-text-green drac-m-xs"
-  />'
+    dracula_text(
+      "mytext",
+      "Text input",
+      placeholder = "Enter some text here!",
+      color = "green"
     ),
     HTML(
       '<input
@@ -72,18 +70,7 @@ ui <- dracula_page(
       </select></div>
       '
     ),
-    HTML(
-      '<div class="drac-box">
-  <input
-    type="checkbox"
-    name="demo"
-    id="switch"
-    class="drac-switch drac-checkbox drac-switch-cyan"
-    checked=""
-  /><label for="demo" class="drac-text drac-text-cyan">Has reflection</label>
-</div>
-      '
-    ),
+    dracula_switch("switch", "My switch input", color = "pink"),
     HTML(
       '<ul class="drac-tabs drac-tabs-white">
   <li class="drac-tab drac-tab-active">

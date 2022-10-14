@@ -230,11 +230,7 @@ findAttribute <- function(x, attr, val) {
   return(FALSE) # found no attribute called `attr`
 }
 
-dracula_colors <- c(
-  "purple-cyan",
-  "yellow-pink",
-  "cyan-green",
-  "pink-purple",
+dracula_basic_colors <- c(
   "cyan",
   "green",
   "orange",
@@ -242,12 +238,28 @@ dracula_colors <- c(
   "purple",
   "red",
   "yellow",
-  "white",
-  "black",
+  "white"
+)
+
+dracula_gradient_colors <- c(
+  "purple-cyan",
+  "yellow-pink",
+  "cyan-green",
+  "pink-purple",
   "black-secondary",
-  "black-light"
+  "black-light",
+  "black"
+)
+
+dracula_extended_colors <- c(
+  dracula_basic_colors,
+  dracula_gradient_colors
 )
 
 validate_dracula_color <- function(color) {
-  stopifnot(color %in% dracula_colors)
+  stopifnot(color %in% dracula_basic_colors)
+}
+
+validate_dracula_extended_color <- function(color) {
+  stopifnot(color %in% dracula_extended_colors)
 }
