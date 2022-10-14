@@ -11,7 +11,13 @@ ui <- dracula_page(
       "My second card",
       color = "yellow",
       borderColor = "yellow",
-      variant = TRUE
+      outline = TRUE
+    ),
+    dracula_badge("Hello World", color = "red"),
+    dracula_badge(
+      "1",
+      color = "red",
+      outline = TRUE
     ),
     dracula_checkbox("checkbox", "My checkbox", color = "pink"),
     dracula_numeric(

@@ -4,10 +4,10 @@
 #' @param color Background color.
 #' @param glowColor Glow color.
 #' @param borderColor Border color. Only if
-#' variant is TRUE.
+#' outline is TRUE.
 #' @param size Padding and margin.
 #' @param rounded Rounded corners.
-#' @param variant Alternate appearance.
+#' @param outline Alternate appearance.
 #' @param height Card height.
 #' @param width Card width.
 #' @param scrollbar Scrollbar color.
@@ -26,7 +26,7 @@
 #'     "My second card",
 #'     color = "pink",
 #'     borderColor = "pink",
-#'     variant = TRUE
+#'     outline = TRUE
 #'   )
 #'  )
 #'  server <- function(input, output, session) {
@@ -40,7 +40,7 @@ dracula_card <- function(
     borderColor = "purple",
     size = "md",
     rounded = "full",
-    variant = FALSE,
+    outline = FALSE,
     height = "auto",
     width = "auto",
     scrollbar = "purple"
@@ -71,7 +71,7 @@ dracula_card <- function(
     ...
   )
 
-  if (variant) {
+  if (outline) {
     card_tag <- tagQuery(card_tag)$
       addAttrs(variant = "subtle")$
       addClass(
@@ -85,5 +85,53 @@ dracula_card <- function(
     tags$div(card_tag)
   } else {
     card_tag
+  }
+}
+
+#' Dracula badge
+#'
+#' @inheritParams dracula_card
+#'
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(dRacula)
+#'  ui <- dracula_page(
+#'   dracula_badge("Hello World", color = "animated"),
+#'   dracula_badge(
+#'     "1",
+#'     color = "red",
+#'     outline = TRUE
+#'   )
+#'  )
+#'  server <- function(input, output, session) {
+#'  }
+#'  shinyApp(ui, server)
+#' }
+dracula_badge <- function(..., color, outline = FALSE, size = "md") {
+  badge_tag <- tags$span(
+    class = sprintf(
+      "drac-badge drac-text-%s drac-m-%s",
+      color,
+      size
+    ),
+    ...
+  )
+
+  if (outline) {
+    tagQuery(badge_tag)$
+      addClass(
+        sprintf(
+          "drac-badge-subtle drac-bg-%s-transparent",
+          color
+        )
+      )$
+      allTags()
+  } else {
+    tagQuery(badge_tag)$
+      addClass(sprintf("drac-bg-%s", color))$
+      allTags()
   }
 }

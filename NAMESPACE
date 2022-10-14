@@ -2,6 +2,7 @@
 
 export(add_dependencies)
 export(add_dracula_deps)
+export(dracula_badge)
 export(dracula_button)
 export(dracula_card)
 export(dracula_checkbox)

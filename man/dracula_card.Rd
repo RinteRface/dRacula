@@ -11,7 +11,7 @@ dracula_card(
   borderColor = "purple",
   size = "md",
   rounded = "full",
-  variant = FALSE,
+  outline = FALSE,
   height = "auto",
   width = "auto",
   scrollbar = "purple"
@@ -25,13 +25,13 @@ dracula_card(
 \item{glowColor}{Glow color.}
 
 \item{borderColor}{Border color. Only if
-variant is TRUE.}
+outline is TRUE.}
 
 \item{size}{Padding and margin.}
 
 \item{rounded}{Rounded corners.}
 
-\item{variant}{Alternate appearance.}
+\item{outline}{Alternate appearance.}
 
 \item{height}{Card height.}
 
@@ -54,7 +54,7 @@ if (interactive()) {
     "My second card",
     color = "pink",
     borderColor = "pink",
-    variant = TRUE
+    outline = TRUE
   )
  )
  server <- function(input, output, session) {
