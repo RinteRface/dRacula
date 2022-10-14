@@ -37,14 +37,32 @@ dracula_heading <- function(..., tagName = "h1", color = "purple",
   )
 }
 
-#' Dracula paragraph
+#' Generate class for text and p elements
 #'
-#' @param ... Text.
 #' @param color Text color.
 #' @param align Text alignement.
 #' @param weight Text weight.
 #' @param size Text size.
+#'
+#' @return String
+#' @keywords internal
+dracula_text_cl <- function(color = "white", align = "left",
+                            weight = "normal", size = "md") {
+  sprintf(
+    "drac-text drac-text-%s drac-line-height drac-text-%s
+      drac-text-%s drac-text-%s",
+    color,
+    align,
+    weight,
+    size
+  )
+}
+
+#' Dracula paragraph
+#'
+#' @param ... Text.
 #' @param lineHeight Text line height.
+#' @inheritParams dracula_text_cl
 #'
 #' @seealso \url{https://ui.draculatheme.com/paragraph}.
 #' @export
@@ -76,15 +94,47 @@ dracula_p <- function(..., color = "white", align = "left",
                       weight = "normal", size = "md",
                       lineHeight = "md") {
   tags$p(
-    class = sprintf(
-      "drac-text drac-text-%s drac-line-height drac-text-%s
-      drac-text-%s drac-text-%s drac-line-height-%s",
-      align,
-      color,
-      weight,
-      size,
-      lineHeight
+    class = paste(
+      dracula_text_cl(
+        color,
+        align,
+        weight,
+        size
+      ),
+      sprintf("drac-line-height-%s", lineHeight)
     ),
     ...
   )
 }
+
+#' Dracula text
+#'
+#' @inheritParams dracula_p
+#'
+#' @seealso \url{https://ui.draculatheme.com/text}.
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(dRacula)
+#'  ui <- dracula_page(
+#'   dracula_text("The quick vampire", color = "red")
+#'  )
+#'  server <- function(input, output, session) {
+#'  }
+#'  shinyApp(ui, server)
+#' }
+dracula_text <- function(..., color = "white", align = "left",
+                         weight = "normal", size = "md") {
+  tags$span(
+    ...,
+    class = dracula_text_cl(
+      color,
+      align,
+      weight,
+      size
+    )
+  )
+}
+

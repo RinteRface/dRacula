@@ -175,7 +175,7 @@ dracula_switch <- function(inputId, label, value = FALSE,
 #'  library(dRacula)
 
 #'  ui <- dracula_page(
-#'    dracula_text(
+#'    dracula_text_input(
 #'     "text",
 #'     "My text input",
 #'     "Hello World",
@@ -189,7 +189,7 @@ dracula_switch <- function(inputId, label, value = FALSE,
 #'  }
 #'  shinyApp(ui, server)
 #' }
-dracula_text <- function(inputId, label, value = "",
+dracula_text_input <- function(inputId, label, value = "",
                          width = NULL, placeholder = NULL,
                          color = "white", textColor = "white",
                          size = "md", outline = FALSE,

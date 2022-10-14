@@ -56,7 +56,7 @@ ui <- dracula_page(
     step = 1,
     color = "orange"
   ),
-  dracula_text(
+  dracula_text_input(
     "mytext",
     "Text input",
     placeholder = "Enter some text here!",
