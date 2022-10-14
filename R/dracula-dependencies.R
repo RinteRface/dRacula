@@ -4,7 +4,6 @@
 #'
 #' @param tag Element to attach the dependencies.
 #'
-#' @importFrom htmltools tagList htmlDependency
 #' @export
 add_dracula_deps <- function(tag) {
  dracula_deps <- htmlDependency(
