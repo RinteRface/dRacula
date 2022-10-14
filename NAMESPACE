@@ -3,6 +3,7 @@
 export(add_dependencies)
 export(add_dracula_deps)
 export(dracula_button)
+export(dracula_card)
 export(dracula_checkbox)
 export(dracula_numeric)
 export(dracula_page)
