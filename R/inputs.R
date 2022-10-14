@@ -115,8 +115,8 @@ dracula_checkbox <- function(inputId, label, value = FALSE, width = NULL,
   tagQuery(tag)$
     find("input")$
     addAttrs(
-      checked = if (value) NA else NULL,
-      disabled = if (disabled) "" else NULL
+      checked = if (value) NA,
+      disabled = if (disabled) ""
     )$
     allTags()
 }
@@ -276,7 +276,7 @@ dracula_button <- function(inputId, label, icon = NULL,
     icon = icon,
     class = btn_cl,
     label,
-    disabled = if (disabled) "" else NULL
+    disabled = if (disabled) ""
   )
 }
 

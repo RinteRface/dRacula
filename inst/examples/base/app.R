@@ -19,14 +19,14 @@ ui <- dracula_page(
       '
     ),
     dracula_checkbox("checkbox", "My checkbox", color = "pink"),
-    HTML(
-      '<input
-    placeholder="Number"
-    type="number"
-    id="numeric"
-    class="drac-input drac-input-cyan-green drac-text-orange drac-my-sm"
-  />
-      '
+    dracula_numeric(
+      "numeric",
+      "My numeric input",
+      200,
+      min = 10,
+      max = 1000,
+      step = 1,
+      color = "orange"
     ),
     dracula_text(
       "mytext",
