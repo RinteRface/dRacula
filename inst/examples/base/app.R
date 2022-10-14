@@ -89,18 +89,11 @@ ui <- dracula_page(
     colnames(mtcars)
   ),
   dracula_switch("switch", "My switch input", color = "pink"),
-  HTML(
-  '<ul class="drac-tabs drac-tabs-white">
-  <li class="drac-tab drac-tab-active">
-    <a class="drac-tab-link drac-text" href="#">Item One</a>
-  </li>
-  <li class="drac-tab">
-    <a class="drac-tab-link drac-text" href="#">Item Two</a>
-  </li>
-  <li class="drac-tab">
-    <a class="drac-tab-link drac-text" href="#">Item Three</a>
-  </li>
-</ul>'
+  dracula_tabs(
+    dracula_tab("tab 1", "Tab 1 content"),
+    dracula_tab("tab 2", "Tab 2 content"),
+    dracula_tab("tab 3", "Tab 3 content")#,
+    #id = "tabs"
   )
 )
 

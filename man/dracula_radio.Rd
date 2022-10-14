@@ -15,7 +15,7 @@ dracula_radio(
   choiceValues = NULL,
   color = "purple",
   textColor = "white",
-  size = "md",
+  size = "xs",
   disabled = FALSE
 )
 }

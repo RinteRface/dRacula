@@ -34,7 +34,7 @@ add_dependencies <- function(tag, deps = NULL) {
   # flatten list by one level
   deps <- unlist(deps, recursive = FALSE)
 
-  htmltools::tagList(tag, deps)
+  tagList(tag, deps)
 }
 
 
