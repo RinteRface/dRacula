@@ -138,3 +138,42 @@ dracula_text <- function(..., color = "white", align = "left",
   )
 }
 
+#' Dracula link
+#'
+#' @param ... Link text.
+#' @param href Link adress.
+#' @inheritParams dracula_text
+#' @param hoverColor Hover color.
+#'
+#' @seealso \url{https://ui.draculatheme.com/anchor#}.
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(dRacula)
+#'  ui <- dracula_page(
+#'   dracula_link(
+#'     "Dracula UI",
+#'     href = "https://ui.draculatheme.com/welcome",
+#'     weight = "bold"
+#'   )
+#'  )
+#'  server <- function(input, output, session) {
+#'  }
+#'  shinyApp(ui, server)
+#' }
+dracula_link <- function(..., href, color = "white",
+                         weight = "normal", size = "md",
+                         hoverColor = "purple") {
+  tags$a(
+    target = if (href != "#") "_blank",
+    href = href,
+    class = sprintf(
+      "drac-anchor drac-text drac-text-%s drac-text-%s--hover",
+      color,
+      hoverColor
+    ),
+    ...
+  )
+}
