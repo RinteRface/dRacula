@@ -541,6 +541,7 @@ dracula_radio <- function(
     })$
     find("input")$
     each(function(tag, index) {
+      tag$attribs$disabled <- if (disabled) ""
       tag$attribs$class <- sprintf(
         "drac-radio drac-radio-%s",
         color
