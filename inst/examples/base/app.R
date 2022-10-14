@@ -43,9 +43,10 @@ ui <- dracula_page(
   />
       '
     ),
-    HTML(
-      '<button id="btn" class="action-button drac-btn drac-bg-animated drac-m-sm">Purple Cyan</button>
-      '
+    dracula_button(
+      "btn",
+      "My action button",
+      color = "animated"
     ),
     HTML(
       '<div class="drac-box">
