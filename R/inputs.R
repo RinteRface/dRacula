@@ -30,7 +30,7 @@ dracula_input <- function(
     outline = FALSE,
     borderSize = c("sm", "md", "lg")) {
 
-  valid_color_func <- if (!type %in% c("checkbox", "radio")) {
+  valid_color_func <- if (!(type %in% c("checkbox", "radio"))) {
     validate_dracula_color
   } else {
     validate_dracula_extended_color
@@ -278,5 +278,70 @@ dracula_button <- function(inputId, label, icon = NULL,
     label,
     disabled = if (disabled) "" else NULL
   )
+}
+
+#' Dracula numeric input
+#'
+#' @inheritParams shiny::numericInput
+#'
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(dRacula)
+#'  ui <- dracula_page(
+#'    dracula_numeric(
+#'     "numeric",
+#'     "My numeric input",
+#'     200,
+#'     min = 10,
+#'     max = 1000,
+#'     step = 1,
+#'     color = "orange"
+#'    )
+#'  )
+#'  server <- function(input, output, session) {
+#'    observe({
+#'     print(input$numeric)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#' }
+dracula_numeric <- function(
+    inputId,
+    label,
+    value,
+    min = NA,
+    max = NA,
+    step = NA,
+    width = NULL,
+    color = "white",
+    textColor = "white",
+    size = "md",
+    outline = FALSE,
+    borderSize = "lg"
+) {
+  tag <- dracula_input(
+    inputId,
+    label,
+    value,
+    placeholder = NULL,
+    type = "number",
+    color,
+    textColor,
+    size,
+    outline,
+    borderSize
+  )
+
+  tagQuery(tag)$
+    find("input")$
+    addAttrs(
+      min = if (!is.na(min)) min,
+      max = if (!is.na(max)) max,
+      step = if (!is.na(step)) step
+    )$
+    allTags()
 }
 
