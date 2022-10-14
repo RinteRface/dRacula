@@ -1,4 +1,5 @@
 library(shiny)
+library(dRacula)
 
 ui <- dracula_page(
     HTML(
@@ -13,12 +14,29 @@ ui <- dracula_page(
       borderColor = "yellow",
       outline = TRUE
     ),
-    dracula_badge("Hello World", color = "red"),
-    dracula_badge(
-      "1",
-      color = "red",
-      outline = TRUE
+    dracula_avatar(
+      "https://ui.draculatheme.com/static/images/avatar.png",
+      color = "orange"
     ),
+    dracula_avatar(
+      "https://ui.draculatheme.com/static/images/avatar.png",
+      borderSize = "lg"
+    ),
+    fluidRow(
+      column(
+        6,
+        dracula_badge("Hello World", color = "red"),
+      ),
+      column(
+        6,
+        dracula_badge(
+          "1",
+          color = "red",
+          outline = TRUE
+        )
+      )
+    ),
+    dracula_divider(),
     dracula_checkbox("checkbox", "My checkbox", color = "pink"),
     dracula_numeric(
       "numeric",

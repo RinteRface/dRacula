@@ -4,16 +4,16 @@
 \alias{dracula_badge}
 \title{Dracula badge}
 \usage{
-dracula_badge(..., color, outline = FALSE, size = "md")
+dracula_badge(..., color = "purple", textColor = "black", outline = FALSE)
 }
 \arguments{
 \item{...}{Card content.}
 
 \item{color}{Background color.}
 
-\item{outline}{Alternate appearance.}
+\item{textColor}{text color.}
 
-\item{size}{Padding and margin.}
+\item{outline}{Alternate appearance.}
 }
 \description{
 Dracula badge
@@ -34,4 +34,7 @@ if (interactive()) {
  }
  shinyApp(ui, server)
 }
+}
+\seealso{
+\url{https://ui.draculatheme.com/badge}.
 }

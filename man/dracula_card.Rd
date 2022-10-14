@@ -62,3 +62,6 @@ if (interactive()) {
  shinyApp(ui, server)
 }
 }
+\seealso{
+\url{https://ui.draculatheme.com/card}
+}

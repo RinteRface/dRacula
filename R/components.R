@@ -12,6 +12,7 @@
 #' @param width Card width.
 #' @param scrollbar Scrollbar color.
 #'
+#' @seealso \url{https://ui.draculatheme.com/card}
 #' @export
 #'
 #' @examples
@@ -91,7 +92,9 @@ dracula_card <- function(
 #' Dracula badge
 #'
 #' @inheritParams dracula_card
+#' @param textColor text color.
 #'
+#' @seealso \url{https://ui.draculatheme.com/badge}.
 #' @export
 #'
 #' @examples
@@ -110,12 +113,12 @@ dracula_card <- function(
 #'  }
 #'  shinyApp(ui, server)
 #' }
-dracula_badge <- function(..., color, outline = FALSE, size = "md") {
+dracula_badge <- function(..., color = "purple", textColor = "black",
+                          outline = FALSE) {
   badge_tag <- tags$span(
     class = sprintf(
-      "drac-badge drac-text-%s drac-m-%s",
-      color,
-      size
+      "drac-badge drac-text-%s drac-m-sm",
+      textColor
     ),
     ...
   )
@@ -135,3 +138,63 @@ dracula_badge <- function(..., color, outline = FALSE, size = "md") {
       allTags()
   }
 }
+
+#' Dracula divider
+#'
+#' @inheritParams dracula_card
+#' @export
+dracula_divider <- function(color = "purple") {
+  tags$div(
+    class = "drac-box drac-m-sm",
+    tags$hr(
+      class = sprintf(
+        "drac-divider drac-border-%s",
+        color
+      )
+    )
+  )
+}
+
+#' Dracula avatar
+#'
+#' @inheritParams dracula_badge
+#' @param src Background image path.
+#' @param borderSize Border size.
+#' @seealso See \url{https://ui.draculatheme.com/avatar#properties}.
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(dRacula)
+#'  ui <- dracula_page(
+#'   dracula_avatar(
+#'     "https://ui.draculatheme.com/static/images/avatar.png",
+#'     color = "green"
+#'   ),
+#'   dracula_avatar(
+#'     "https://ui.draculatheme.com/static/images/avatar.png",
+#'     borderSize = "lg"
+#'   )
+#'  )
+#'  server <- function(input, output, session) {
+#'  }
+#'  shinyApp(ui, server)
+#' }
+dracula_avatar <- function(src, color = "purple",
+                           borderSize = "md") {
+  tags$span(
+    class = sprintf(
+      "drac-avatar drac-bg-%s-transparent
+      drac-text-%s drac-avatar-%s-stroke drac-m-sm",
+      color,
+      color,
+      borderSize
+    ),
+    tags$span(
+      class = "drac-avatar-background",
+      style = sprintf("background-image: url(%s);", src)
+    )
+  )
+}
+
