@@ -27,6 +27,7 @@ if (interactive()) {
   dracula_badge(
     "1",
     color = "red",
+    textColor = "red",
     outline = TRUE
   )
  )

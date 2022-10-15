@@ -559,3 +559,69 @@ dracula_radio <- function(
     allTags()
 }
 
+#' Dracula range input
+#'
+#' @inheritParams dracula_numeric
+#'
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(dRacula)
+#'  ui <- dracula_page(
+#'    dracula_range(
+#'     "range",
+#'     "My range input",
+#'     200,
+#'     min = 10,
+#'     max = 1000,
+#'     step = 1,
+#'     color = "orange"
+#'    )
+#'  )
+#'  server <- function(input, output, session) {
+#'    observe({
+#'     print(input$range)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#' }
+dracula_range <- function(
+    inputId,
+    label,
+    value,
+    min,
+    max,
+    step = NA,
+    color = "white",
+    textColor = "white",
+    size = "md",
+    borderSize = "lg"
+) {
+  # range is just a numeric with different type
+  tag <- dracula_numeric(
+    inputId,
+    label,
+    value,
+    min,
+    max,
+    step,
+    width = NULL,
+    color,
+    textColor,
+    size,
+    outline = FALSE,
+    borderSize
+  )
+
+  tagQuery(tag)$
+    addClass(sprintf("drac-range-%s", color))$
+    find("input")$
+    removeAttrs("type")$
+    removeClass(sprintf("drac-input-%s", color))$
+    removeClass(sprintf("drac-text-%s", color))$
+    addAttrs(type = "range")$
+    allTags()
+}
+

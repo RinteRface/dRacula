@@ -1,6 +1,8 @@
 library(shiny)
 library(dRacula)
 
+addResourcePath("www", "www")
+
 ui <- dracula_page(
   dracula_tabs(
     dracula_tab(
@@ -28,7 +30,7 @@ ui <- dracula_page(
      ),
      dracula_divider(),
      dracula_avatar(
-       "https://ui.draculatheme.com/static/images/avatar.png",
+       "www/bat.png",
        color = "orange"
      ),
      dracula_avatar(
@@ -85,15 +87,26 @@ ui <- dracula_page(
       dracula_select(
         "select",
         "My select input",
-        colnames(mtcars)
+        colnames(mtcars),
+        color = "purple"
       ),
-      dracula_switch("switch", "My switch input", color = "pink")
+      dracula_switch("switch", "My switch input", color = "pink"),
+      dracula_range(
+        "range",
+        "My range input",
+        50,
+        min = 0,
+        max = 100,
+        step = 10,
+        color = "cyan"
+      )
     ),
     dracula_tab("tab 3"),
     selected = "Inputs",
-    color = "green",
-    id = "tabs"
-  )
+    color = "green"#,
+    #id = "tabs"
+  ),
+  dracula_link(href = "https://www.freepik.com/free-vector/halloween-bat-flat-design_9885927.htm?epik=dj0yJnU9U1ZFZ3E5ME5tMURVcG91MFZEM3pwQWdqbmNlQlE1M0UmcD0wJm49RkgzZGRjMm9OQ2t4LTdhQlNrdnI5ZyZ0PUFBQUFBR05LVkFJ#page=2&query=halloween%20bats&position=48&from_view=search", "Image by pikisuperstar on Freepik" )
 )
 
 
@@ -107,6 +120,7 @@ server <- function(input, output, session) {
     print(input$radio)
     print(input$select)
     print(input$switch)
+    print(input$range)
   })
 }
 

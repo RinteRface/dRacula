@@ -4,3 +4,4 @@ $(function() {
     $(this).toggleClass('drac-tab-active');
   });
 });
+import './input-range.js';

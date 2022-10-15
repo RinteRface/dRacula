@@ -13,8 +13,9 @@ add_dRacula_deps <- function(tag) {
   version = "0.0.0.9000",
   src = c(file = "dRacula-0.0.0.9000"),
   script = "js/dRacula.js",
+  stylesheet = "css/dRacula.min.css",
   package = "dRacula",
  )
  tagList(tag, dRacula_deps)
 }
-    
+
