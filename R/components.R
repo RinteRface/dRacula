@@ -106,6 +106,7 @@ dracula_card <- function(
 #'   dracula_badge(
 #'     "1",
 #'     color = "red",
+#'     textColor = "red",
 #'     outline = TRUE
 #'   )
 #'  )
@@ -117,7 +118,7 @@ dracula_badge <- function(..., color = "purple", textColor = "black",
                           outline = FALSE) {
   badge_tag <- tags$span(
     class = sprintf(
-      "drac-badge drac-text-%s drac-m-sm",
+      "drac-badge drac-text-%s drac-m-sm drac-p-sm",
       textColor
     ),
     ...
@@ -145,7 +146,7 @@ dracula_badge <- function(..., color = "purple", textColor = "black",
 #' @export
 dracula_divider <- function(color = "purple") {
   tags$div(
-    class = "drac-box drac-m-sm",
+    class = "drac-box drac-m-sm drac-p-sm",
     tags$hr(
       class = sprintf(
         "drac-divider drac-border-%s",

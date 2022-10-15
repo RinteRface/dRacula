@@ -18,6 +18,6 @@ dracula_page <- function(...) {
       ),
       ...
     ),
-    deps = c("dracula")
+    deps = c("dracula", "dRacula")
   )
 }

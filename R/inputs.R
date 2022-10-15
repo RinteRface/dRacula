@@ -74,7 +74,7 @@ dracula_input <- function(
     list(label_tag, input_tag)
   }
 
-  do.call(tags$div, c(list(class = "drac-box"), tag_list))
+  do.call(tags$div, c(list(class = "drac-box drac-m-sm"), tag_list))
 }
 
 #' Dracula checkbox

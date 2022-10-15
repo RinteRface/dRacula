@@ -2,10 +2,13 @@ library(shiny)
 library(dRacula)
 
 ui <- dracula_page(
-  dracula_heading("Hello World", color = "cyan-green"),
-  dracula_card(
-    dracula_p(
-      "Dracula is an 1897 Gothic horror novel by Irish author Bram Stoker. It
+  dracula_tabs(
+    dracula_tab(
+      "Components",
+      dracula_heading("Hello World", color = "cyan-green"),
+      dracula_card(
+        dracula_p(
+          "Dracula is an 1897 Gothic horror novel by Irish author Bram Stoker. It
      introduced the character of Count Dracula and established many conventions
      of subsequent vampire fantasy. The novel tells the story of Dracula's
      attempt to move from Transylvania to England so that he may find new blood
@@ -15,85 +18,81 @@ ui <- dracula_page(
      weight = "bold",
      size = "lg",
      lineHeight = "xs"
-    )
-  ),
-  dracula_card(
-    "My second card",
-    color = "yellow",
-    borderColor = "yellow",
-    outline = TRUE
-  ),
-  dracula_avatar(
-    "https://ui.draculatheme.com/static/images/avatar.png",
-    color = "orange"
-  ),
-  dracula_avatar(
-    "https://ui.draculatheme.com/static/images/avatar.png",
-    borderSize = "lg"
-  ),
-  fluidRow(
-    column(
-      6,
-      dracula_badge("Hello World", color = "red"),
+        )
+      ),
+     dracula_card(
+       "My second card",
+       color = "yellow",
+       borderColor = "yellow",
+       outline = TRUE
+     ),
+     dracula_divider(),
+     dracula_avatar(
+       "https://ui.draculatheme.com/static/images/avatar.png",
+       color = "orange"
+     ),
+     dracula_avatar(
+       "https://ui.draculatheme.com/static/images/avatar.png",
+       borderSize = "lg"
+     ),
+     dracula_divider(),
+     fluidRow(
+       column(
+         6,
+         dracula_badge("Hello World", color = "red"),
+       ),
+       column(
+         6,
+         dracula_badge(
+           "1",
+           color = "red",
+           textColor = "red",
+           outline = TRUE
+         )
+       )
+     )
     ),
-    column(
-      6,
-      dracula_badge(
-        "1",
-        color = "red",
-        outline = TRUE
-      )
-    )
-  ),
-  dracula_divider(),
-  dracula_checkbox("checkbox", "My checkbox", color = "pink"),
-  dracula_numeric(
-    "numeric",
-    "My numeric input",
-    200,
-    min = 10,
-    max = 1000,
-    step = 1,
-    color = "orange"
-  ),
-  dracula_text_input(
-    "mytext",
-    "Text input",
-    placeholder = "Enter some text here!",
-    color = "green"
-  ),
-  HTML(
-    '<input
-    placeholder="Range"
-    type="range"
-    id="slider"
-    class="drac-input drac-input-lg drac-input-pink drac-text-pink drac-my-sm"
-  />
-      '
-  ),
-  dracula_button(
-    "btn",
-    "My action button",
-    color = "animated"
-  ),
-  dracula_radio(
-    "radio",
-    "My radio input",
-    color = "pink",
-    textColor = "yellow",
-    colnames(mtcars)
-  ),
-  dracula_select(
-    "select",
-    "My select input",
-    colnames(mtcars)
-  ),
-  dracula_switch("switch", "My switch input", color = "pink"),
-  dracula_tabs(
-    dracula_tab("tab 1", "Tab 1 content"),
-    dracula_tab("tab 2", "Tab 2 content"),
-    dracula_tab("tab 3", "Tab 3 content")#,
-    #id = "tabs"
+    dracula_tab(
+      "Inputs",
+      dracula_checkbox("checkbox", "My checkbox", color = "pink"),
+      dracula_numeric(
+        "numeric",
+        "My numeric input",
+        200,
+        min = 10,
+        max = 1000,
+        step = 1,
+        color = "orange"
+      ),
+      dracula_text_input(
+        "mytext",
+        "Text input",
+        placeholder = "Enter some text here!",
+        color = "green"
+      ),
+      dracula_button(
+        "btn",
+        "My action button",
+        color = "animated"
+      ),
+      dracula_radio(
+        "radio",
+        "My radio input",
+        color = "pink",
+        textColor = "yellow",
+        colnames(mtcars)
+      ),
+      dracula_select(
+        "select",
+        "My select input",
+        colnames(mtcars)
+      ),
+      dracula_switch("switch", "My switch input", color = "pink")
+    ),
+    dracula_tab("tab 3"),
+    selected = "Inputs",
+    color = "green",
+    id = "tabs"
   )
 )
 

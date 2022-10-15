@@ -10,9 +10,11 @@
 dracula_tabs <- function(..., id = NULL, selected = NULL, color = "white") {
   tabset_tag <- tabsetPanel(
     ...,
-    id,
-    selected,
-    type = "tabs"
+    id = id,
+    selected = selected,
+    type = "tabs",
+    header = NULL,
+    footer = NULL
   )
 
   tabset_tag <- tagQuery(htmltools:::tagify(tabset_tag))$
@@ -33,6 +35,9 @@ dracula_tabs <- function(..., id = NULL, selected = NULL, color = "white") {
     })$
     find("a")$
     addClass("drac-tab-link drac-text")$
+    reset()$
+    find(".tab-content")$
+    addClass(sprintf("drac-text-%s drac-m-md", color))$
     allTags()
 
   tags$div(
@@ -49,5 +54,5 @@ dracula_tabs <- function(..., id = NULL, selected = NULL, color = "white") {
 #' @export
 #' @rdname tabs
 dracula_tab <- function(title, ..., value = title, icon = NULL) {
- tabPanel(title, ..., value, icon)
+ tabPanel(title = title, ..., value = value, icon = icon)
 }
