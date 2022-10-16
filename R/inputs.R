@@ -461,10 +461,99 @@ dracula_select <- function(
   )
 }
 
-#' Dracula radio button
+#' Dracula grouped inputs
+#'
+#' Internal to create radios and checkboxgroup
 #'
 #' @inheritParams shiny::radioButtons
 #' @inheritParams dracula_input
+#'
+#' @keywords internal
+dracula_group_input <- function(
+    inputId,
+    label,
+    choices = NULL,
+    selected = NULL,
+    inline = FALSE,
+    width = NULL,
+    choiceNames = NULL,
+    choiceValues = NULL,
+    type,
+    color = "purple",
+    textColor = "white",
+    size = "xs",
+    disabled = FALSE
+) {
+
+  tag_func <- if (type == "radio") {
+    radioButtons
+  } else {
+    checkboxGroupInput
+  }
+
+  tag <- tag_func(
+    inputId,
+    label,
+    choices,
+    selected,
+    inline,
+    width,
+    choiceNames,
+    choiceValues
+  )
+
+  tagQuery(tag)$
+    each(function(tag, index) {
+      tag$children[[2]] <- tag$children[[2]]$children
+      tag
+    })$
+    addClass("drac-box")$
+    removeClass("form-group shiny-input-container")$
+    removeAttrs(c("aria-labelledby", "role"))$
+    find(".shiny-options-group")$
+    removeClass("shiny-options-group")$
+    reset()$
+    find("label")$
+    removeClass("control-label")$
+    addClass(
+      sprintf(
+        "drac-text drac-text-%s",
+        textColor
+      )
+    )$
+    reset()$
+    find(sprintf(".%s", type))$
+    removeClass(sprintf("%s", type))$
+    addClass(sprintf("drac-box drac-m-%s", size))$
+    each(function(tag, index) {
+      tag$children <- tag$children[[1]]$children
+      tag
+    })$
+    find("input")$
+    each(function(tag, index) {
+      tag$attribs$disabled <- if (disabled) ""
+      tag$attribs$class <- sprintf(
+        "drac-%s drac-%s-%s",
+        type,
+        type,
+        color
+      )
+    })$
+    reset()$
+    find("span")$
+    each(function(tag, index) {
+      tag$name <- "label"
+      tag$attribs$class <- sprintf(
+        "drac-text drac-text-%s",
+        textColor
+      )
+    })$
+    allTags()
+}
+
+#' Dracula radio button
+#'
+#' @inheritParams dracula_group_input
 #'
 #' @seealso \url{https://ui.draculatheme.com/radio}.
 #' @export
@@ -501,7 +590,7 @@ dracula_radio <- function(
     size = "xs",
     disabled = FALSE
 ) {
-  radio_tag <- radioButtons(
+  dracula_group_input(
     inputId,
     label,
     choices,
@@ -509,54 +598,69 @@ dracula_radio <- function(
     inline,
     width,
     choiceNames,
-    choiceValues
+    choiceValues,
+    type = "radio",
+    color,
+    textColor,
+    size,
+    disabled
   )
+}
 
-  tagQuery(radio_tag)$
-    each(function(tag, index) {
-      tag$children[[2]] <- tag$children[[2]]$children
-      tag
-    })$
-    addClass("drac-box")$
-    removeClass("form-group shiny-input-container")$
-    removeAttrs(c("aria-labelledby", "role"))$
-    find(".shiny-options-group")$
-    removeClass("shiny-options-group")$
-    reset()$
-    find("label")$
-    removeClass("control-label")$
-    addClass(
-      sprintf(
-        "drac-text drac-text-%s",
-        textColor
-      )
-    )$
-    reset()$
-    find(".radio")$
-    removeClass("radio")$
-    addClass(sprintf("drac-box drac-m-%s", size))$
-    each(function(tag, index) {
-      tag$children <- tag$children[[1]]$children
-      tag
-    })$
-    find("input")$
-    each(function(tag, index) {
-      tag$attribs$disabled <- if (disabled) ""
-      tag$attribs$class <- sprintf(
-        "drac-radio drac-radio-%s",
-        color
-      )
-    })$
-    reset()$
-    find("span")$
-    each(function(tag, index) {
-      tag$name <- "label"
-      tag$attribs$class <- sprintf(
-        "drac-text drac-text-%s",
-        textColor
-      )
-    })$
-    allTags()
+#' Dracula checkbox group
+#'
+#' @inheritParams dracula_group_input
+#'
+#' @seealso \url{https://ui.draculatheme.com/checkbox}.
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(dRacula)
+#'  ui <- dracula_page(
+#'    dracula_checkbox_group(
+#'     "checkbox_group",
+#'     "My checkbox group input",
+#'     colnames(mtcars)
+#'    )
+#'  )
+#'  server <- function(input, output, session) {
+#'    observe({
+#'     print(input$checkbox_group)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#' }
+dracula_checkbox_group <- function(
+    inputId,
+    label,
+    choices = NULL,
+    selected = NULL,
+    inline = FALSE,
+    width = NULL,
+    choiceNames = NULL,
+    choiceValues = NULL,
+    color = "purple",
+    textColor = "white",
+    size = "xs",
+    disabled = FALSE
+) {
+  dracula_group_input(
+    inputId,
+    label,
+    choices,
+    selected,
+    inline,
+    width,
+    choiceNames,
+    choiceValues,
+    type = "checkbox",
+    color,
+    textColor,
+    size,
+    disabled
+  )
 }
 
 #' Dracula range input

@@ -29,13 +29,15 @@ ui <- dracula_page(
        outline = TRUE
      ),
      dracula_divider(),
-     dracula_avatar(
-       "www/bat.png",
-       color = "orange"
-     ),
-     dracula_avatar(
-       "https://ui.draculatheme.com/static/images/avatar.png",
-       borderSize = "lg"
+     fluidRow(
+       dracula_avatar(
+         "www/bat.png",
+         color = "orange"
+       ),
+       dracula_avatar(
+         "https://ui.draculatheme.com/static/images/avatar.png",
+         borderSize = "lg"
+       )
      ),
      dracula_divider(),
      fluidRow(
@@ -84,6 +86,12 @@ ui <- dracula_page(
         textColor = "yellow",
         colnames(mtcars)
       ),
+      dracula_checkbox_group(
+        "checkbox_group",
+        "My checkbox group input",
+        selected = c("weight", "Chick"),
+        colnames(ChickWeight)
+      ),
       dracula_select(
         "select",
         "My select input",
@@ -118,6 +126,7 @@ server <- function(input, output, session) {
     print(input$slider)
     print(input$btn)
     print(input$radio)
+    print(input$checkbox_group)
     print(input$select)
     print(input$switch)
     print(input$range)
