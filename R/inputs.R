@@ -617,7 +617,7 @@ dracula_range <- function(
 
   tag$children[[2]] <- tagList(
     tags$div(
-      class = sprintf("range-value drac-text-%s", textColor),
+      class = "range-value",
       id = sprintf("%s-range-value", inputId)
     ),
     tag$children[[2]]
