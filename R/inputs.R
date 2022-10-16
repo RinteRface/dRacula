@@ -615,7 +615,16 @@ dracula_range <- function(
     borderSize
   )
 
+  tag$children[[2]] <- tagList(
+    tags$div(
+      class = sprintf("range-value drac-text-%s", textColor),
+      id = sprintf("%s-range-value", inputId)
+    ),
+    tag$children[[2]]
+  )
+
   tagQuery(tag)$
+    addAttrs(style = "position: relative")$
     addClass(sprintf("drac-range-%s", color))$
     find("input")$
     removeAttrs("type")$

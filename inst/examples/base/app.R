@@ -97,7 +97,7 @@ ui <- dracula_page(
         50,
         min = 0,
         max = 100,
-        step = 10,
+        #step = 10,
         color = "cyan"
       )
     ),
