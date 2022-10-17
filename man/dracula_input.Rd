@@ -10,8 +10,8 @@ dracula_input(
   value = NULL,
   placeholder = NULL,
   type = c("checkbox", "number", "text", "date", "range", "radio"),
-  color = dracula_colors,
-  textColor = dracula_colors,
+  color = dracula_basic_colors,
+  textColor = dracula_basic_colors,
   size = c("sm", "md", "lg"),
   outline = FALSE,
   borderSize = c("sm", "md", "lg")

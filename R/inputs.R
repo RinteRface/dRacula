@@ -424,8 +424,7 @@ dracula_select <- function(
 
   # Modify select element
   select_tag[[1]]$attribs$class <- sprintf(
-    "drac-select drac-select-%s
-    drac-select-%s",
+    "drac-select drac-select-%s drac-select-%s",
     color,
     size
   )

@@ -47,16 +47,20 @@ dracula_card <- function(
     scrollbar = "purple"
 ) {
 
-  card_cl <- sprintf(
-    "drac-box drac-card drac-bg-%s drac-p-%s drac-m-%s
-    drac-rounded-%s drac-h-%s drac-w-%s drac-scrollbar-%s",
-    color,
-    size,
-    size,
-    rounded,
-    height,
-    width,
-    scrollbar
+  card_cl <- paste(
+    sprintf(
+      "drac-box drac-card drac-bg-%s drac-p-%s drac-m-%s",
+      color,
+      size,
+      size
+    ),
+    sprintf(
+      "drac-rounded-%s drac-h-%s drac-w-%s drac-scrollbar-%s",
+      rounded,
+      height,
+      width,
+      scrollbar
+    )
   )
 
   if (!is.null(glowColor)) {
@@ -184,10 +188,13 @@ dracula_divider <- function(color = "purple") {
 #' }
 dracula_avatar <- function(src, color = "purple",
                            borderSize = "md") {
+
+  base_cl <- "drac-avatar drac-m-sm"
+
   tags$span(
     class = sprintf(
-      "drac-avatar drac-bg-%s-transparent
-      drac-text-%s drac-avatar-%s-stroke drac-m-sm",
+      "%s drac-bg-%s-transparent drac-text-%s drac-avatar-%s-stroke",
+      base_cl,
       color,
       color,
       borderSize

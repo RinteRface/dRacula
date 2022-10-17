@@ -48,9 +48,12 @@ dracula_heading <- function(..., tagName = "h1", color = "purple",
 #' @keywords internal
 dracula_text_cl <- function(color = "white", align = "left",
                             weight = "normal", size = "md") {
+
+  base_cl <- "drac-text"
+
   sprintf(
-    "drac-text drac-text-%s drac-line-height drac-text-%s
-      drac-text-%s drac-text-%s",
+    "%s drac-text-%s drac-line-height drac-text-%s drac-text-%s drac-text-%s",
+    base_cl,
     color,
     align,
     weight,
