@@ -39,7 +39,7 @@ ui <- dracula_page(
       dracula_divider(),
       fluidRow(
         dracula_avatar(
-          "www/bat.png",
+          "www/045-dracula.svg",
           color = "orange"
         ),
         dracula_avatar(
@@ -121,8 +121,7 @@ ui <- dracula_page(
     selected = "Inputs",
     color = "green"#,
     #id = "tabs"
-  ),
-  dracula_link(href = "https://www.freepik.com/free-vector/halloween-bat-flat-design_9885927.htm?epik=dj0yJnU9U1ZFZ3E5ME5tMURVcG91MFZEM3pwQWdqbmNlQlE1M0UmcD0wJm49RkgzZGRjMm9OQ2t4LTdhQlNrdnI5ZyZ0PUFBQUFBR05LVkFJ#page=2&query=halloween%20bats&position=48&from_view=search", "Image by pikisuperstar on Freepik" )
+  )
 )
 
 
