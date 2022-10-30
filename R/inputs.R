@@ -450,6 +450,9 @@ update_dracula_button <- function(
 #' @inheritParams shiny::numericInput
 #'
 #' @export
+#' @rdname numeric-input
+#' @seealso \url{https://ui.draculatheme.com/input} for all
+#' available options.
 #'
 #' @examples
 #' if (interactive()) {
@@ -469,6 +472,33 @@ update_dracula_button <- function(
 #'  server <- function(input, output, session) {
 #'    observe({
 #'     print(input$numeric)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#'
+#'  # Update numeric #
+#'  ui <- dracula_page(
+#'   dracula_button("go", "Update text"),
+#'   dracula_numeric(
+#'     "numeric",
+#'     "My numeric input",
+#'     200,
+#'     min = 10,
+#'     max = 1000,
+#'     step = 1,
+#'     color = "orange"
+#'   )
+#'  )
+#'  server <- function(input, output, session) {
+#'    observeEvent(input$go, {
+#'      update_dracula_numeric(
+#'        "numeric",
+#'        label = "New label",
+#'        value = 30,
+#'        min = 0,
+#'        max = 100,
+#'        step = 10
+#'      )
 #'    })
 #'  }
 #'  shinyApp(ui, server)
@@ -508,6 +538,33 @@ dracula_numeric <- function(
       step = if (!is.na(step)) step
     )$
     allTags()
+}
+
+#' Update dracula numeric input
+#'
+#' @inheritParams shiny::updateNumericInput
+#'
+#' @return Send message to JavaScript
+#' @export
+#' @rdname numeric-input
+update_dracula_numeric <- function(
+    inputId,
+    label = NULL,
+    value = NULL,
+    min = NULL,
+    max = NULL,
+    step = NULL,
+    session = getDefaultReactiveDomain()
+) {
+  shiny::updateNumericInput(
+    session = session,
+    inputId = inputId,
+    label = label,
+    value = value,
+    min = min,
+    max = max,
+    step = step
+  )
 }
 
 dracula_select_arrow <- function(color) {
