@@ -99,3 +99,7 @@ if (interactive()) {
  shinyApp(ui, server)
 }
 }
+\seealso{
+\url{https://ui.draculatheme.com/input} for all
+available options.
+}

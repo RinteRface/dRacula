@@ -169,6 +169,8 @@ dracula_switch <- function(inputId, label, value = FALSE,
 #' @rdname text-input
 #'
 #' @export
+#' @seealso \url{https://ui.draculatheme.com/input} for all
+#' available options.
 #'
 #' @examples
 #' if (interactive()) {
