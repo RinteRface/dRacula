@@ -19,7 +19,6 @@ update_dracula_checkbox(
   inputId,
   label = NULL,
   value = NULL,
-  placeholder = NULL,
   session = getDefaultReactiveDomain()
 )
 }
@@ -39,10 +38,6 @@ see \code{\link[shiny:validateCssUnit]{validateCssUnit()}}.}
 
 \item{disabled}{Whether to disable the checkbox.
 Default to FALSE.}
-
-\item{placeholder}{A character string giving the user a hint as to what can
-be entered into the control. Internet Explorer 8 and 9 do not support this
-option.}
 
 \item{session}{The \code{session} object passed to function given to
 \code{shinyServer}. Default is \code{getDefaultReactiveDomain()}.}

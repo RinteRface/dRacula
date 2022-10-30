@@ -153,7 +153,6 @@ update_dracula_checkbox <- function (
     inputId,
     label = NULL,
     value = NULL,
-    placeholder = NULL,
     session = getDefaultReactiveDomain()) {
   shiny::updateCheckboxInput(
     session = session,
@@ -170,6 +169,9 @@ update_dracula_checkbox <- function (
 #'
 #' @inheritParams dracula_checkbox
 #' @export
+#' @rdname switch-input
+#' @seealso \url{https://ui.draculatheme.com/input} for all
+#' available options.
 #'
 #' @examples
 #' if (interactive()) {
@@ -182,6 +184,22 @@ update_dracula_checkbox <- function (
 #'  server <- function(input, output, session) {
 #'    observe({
 #'     print(input$switch)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#'
+#'  # Update switch #
+#'  ui <- dracula_page(
+#'   dracula_button("go", "Update text"),
+#'   dracula_switch("checkbox", "My checkbox", color = "pink")
+#'  )
+#'  server <- function(input, output, session) {
+#'    observeEvent(input$go, {
+#'      update_dracula_switch(
+#'        "checkbox",
+#'        label = "Plop",
+#'        value = "New value"
+#'      )
 #'    })
 #'  }
 #'  shinyApp(ui, server)
@@ -202,6 +220,23 @@ dracula_switch <- function(inputId, label, value = FALSE,
     find("input")$
     addClass("drac-switch")$
     allTags()
+}
+
+#' Update dracula switch input
+#'
+#' @inheritParams shiny::updateCheckboxInput
+#'
+#' @return Send message to JavaScript
+#' @note label does not work yet.
+#' @export
+#' @rdname switch-input
+update_dracula_switch <- function (
+    inputId,
+    label = NULL,
+    value = NULL,
+    placeholder = NULL,
+    session = getDefaultReactiveDomain()) {
+  update_dracula_checkbox(inputId, label, value, session)
 }
 
 #' Dracula text input

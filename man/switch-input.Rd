@@ -2,6 +2,7 @@
 % Please edit documentation in R/inputs.R
 \name{dracula_switch}
 \alias{dracula_switch}
+\alias{update_dracula_switch}
 \title{Dracula switch}
 \usage{
 dracula_switch(
@@ -11,6 +12,14 @@ dracula_switch(
   color = "purple",
   textColor = "white",
   disabled = FALSE
+)
+
+update_dracula_switch(
+  inputId,
+  label = NULL,
+  value = NULL,
+  placeholder = NULL,
+  session = getDefaultReactiveDomain()
 )
 }
 \arguments{
@@ -26,10 +35,19 @@ dracula_switch(
 
 \item{disabled}{Whether to disable the checkbox.
 Default to FALSE.}
+
+\item{session}{The \code{session} object passed to function given to
+\code{shinyServer}. Default is \code{getDefaultReactiveDomain()}.}
+}
+\value{
+Send message to JavaScript
 }
 \description{
 Similar to checkbox but with
 a toggle widget.
+}
+\note{
+label does not work yet.
 }
 \examples{
 if (interactive()) {
@@ -44,5 +62,25 @@ if (interactive()) {
    })
  }
  shinyApp(ui, server)
+
+ # Update switch #
+ ui <- dracula_page(
+  dracula_button("go", "Update text"),
+  dracula_switch("checkbox", "My checkbox", color = "pink")
+ )
+ server <- function(input, output, session) {
+   observeEvent(input$go, {
+     update_dracula_switch(
+       "checkbox",
+       label = "Plop",
+       value = "New value"
+     )
+   })
+ }
+ shinyApp(ui, server)
 }
+}
+\seealso{
+\url{https://ui.draculatheme.com/input} for all
+available options.
 }
