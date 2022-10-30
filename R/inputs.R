@@ -84,7 +84,11 @@ dracula_input <- function(
 #' @param disabled Whether to disable the checkbox.
 #' Default to FALSE.
 #'
+#' @seealso \url{https://ui.draculatheme.com/input} for all
+#' available options.
+#'
 #' @export
+#' @rdname checkbox-input
 #' @examples
 #' if (interactive()) {
 #'  library(shiny)
@@ -96,6 +100,22 @@ dracula_input <- function(
 #'  server <- function(input, output, session) {
 #'    observe({
 #'     print(input$checkbox)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#'
+#'  # Update checkbox #
+#'  ui <- dracula_page(
+#'   dracula_button("go", "Update text"),
+#'   dracula_checkbox("checkbox", "My checkbox", color = "pink")
+#'  )
+#'  server <- function(input, output, session) {
+#'    observeEvent(input$go, {
+#'      update_dracula_checkbox(
+#'        "checkbox",
+#'        label = "Plop",
+#'        value = "New value"
+#'      )
 #'    })
 #'  }
 #'  shinyApp(ui, server)
@@ -121,6 +141,27 @@ dracula_checkbox <- function(inputId, label, value = FALSE, width = NULL,
     allTags()
 }
 
+#' Update dracula checkbox input
+#'
+#' @inheritParams shiny::updateCheckboxInput
+#'
+#' @return Send message to JavaScript
+#' @note label does not work yet.
+#' @export
+#' @rdname checkbox-input
+update_dracula_checkbox <- function (
+    inputId,
+    label = NULL,
+    value = NULL,
+    placeholder = NULL,
+    session = getDefaultReactiveDomain()) {
+  shiny::updateCheckboxInput(
+    session = session,
+    inputId = inputId,
+    label = label,
+    value = value
+  )
+}
 
 #' Dracula switch
 #'

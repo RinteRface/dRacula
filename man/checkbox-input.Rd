@@ -2,6 +2,7 @@
 % Please edit documentation in R/inputs.R
 \name{dracula_checkbox}
 \alias{dracula_checkbox}
+\alias{update_dracula_checkbox}
 \title{Dracula checkbox}
 \usage{
 dracula_checkbox(
@@ -12,6 +13,14 @@ dracula_checkbox(
   color = "purple",
   textColor = "white",
   disabled = FALSE
+)
+
+update_dracula_checkbox(
+  inputId,
+  label = NULL,
+  value = NULL,
+  placeholder = NULL,
+  session = getDefaultReactiveDomain()
 )
 }
 \arguments{
@@ -30,9 +39,24 @@ see \code{\link[shiny:validateCssUnit]{validateCssUnit()}}.}
 
 \item{disabled}{Whether to disable the checkbox.
 Default to FALSE.}
+
+\item{placeholder}{A character string giving the user a hint as to what can
+be entered into the control. Internet Explorer 8 and 9 do not support this
+option.}
+
+\item{session}{The \code{session} object passed to function given to
+\code{shinyServer}. Default is \code{getDefaultReactiveDomain()}.}
+}
+\value{
+Send message to JavaScript
 }
 \description{
 Dracula checkbox
+
+Update dracula checkbox input
+}
+\note{
+label does not work yet.
 }
 \examples{
 if (interactive()) {
@@ -47,5 +71,25 @@ if (interactive()) {
    })
  }
  shinyApp(ui, server)
+
+ # Update checkbox #
+ ui <- dracula_page(
+  dracula_button("go", "Update text"),
+  dracula_checkbox("checkbox", "My checkbox", color = "pink")
+ )
+ server <- function(input, output, session) {
+   observeEvent(input$go, {
+     update_dracula_checkbox(
+       "checkbox",
+       label = "Plop",
+       value = "New value"
+     )
+   })
+ }
+ shinyApp(ui, server)
 }
+}
+\seealso{
+\url{https://ui.draculatheme.com/input} for all
+available options.
 }
