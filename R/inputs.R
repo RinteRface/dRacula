@@ -166,6 +166,7 @@ dracula_switch <- function(inputId, label, value = FALSE,
 #' Dracula text input
 #'
 #' @inheritParams dracula_input
+#' @rdname text-input
 #'
 #' @export
 #'
@@ -173,7 +174,6 @@ dracula_switch <- function(inputId, label, value = FALSE,
 #' if (interactive()) {
 #'  library(shiny)
 #'  library(dRacula)
-
 #'  ui <- dracula_page(
 #'    dracula_text_input(
 #'     "text",
@@ -185,6 +185,27 @@ dracula_switch <- function(inputId, label, value = FALSE,
 #'  server <- function(input, output, session) {
 #'    observe({
 #'     print(input$text)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#'
+#'  # Update input #
+#'  ui <- dracula_page(
+#'   dracula_button("go", "Update text"),
+#'   dracula_text_input(
+#'     "text",
+#'     "My text input",
+#'     "Hello World"
+#'   )
+#'  )
+#'  server <- function(input, output, session) {
+#'    observeEvent(input$go, {
+#'      update_dracula_text_input(
+#'        "text",
+#'        label = "Plop",
+#'        value = "New value",
+#'        placeholder = "New placeholder"
+#'      )
 #'    })
 #'  }
 #'  shinyApp(ui, server)
@@ -205,6 +226,28 @@ dracula_text_input <- function(inputId, label, value = "",
     size,
     outline,
     borderSize
+  )
+}
+
+#' Update dracula text input
+#'
+#' @inheritParams shiny::updateTextInput
+#'
+#' @return Send message to JavaScript
+#' @export
+#' @rdname text-input
+update_dracula_text_input <- function (
+    inputId,
+    label = NULL,
+    value = NULL,
+    placeholder = NULL,
+    session = getDefaultReactiveDomain()) {
+  shiny::updateTextInput(
+    session = session,
+    inputId = inputId,
+    label = label,
+    value = value,
+    placeholder = placeholder
   )
 }
 

@@ -2,6 +2,7 @@
 % Please edit documentation in R/inputs.R
 \name{dracula_text_input}
 \alias{dracula_text_input}
+\alias{update_dracula_text_input}
 \title{Dracula text input}
 \usage{
 dracula_text_input(
@@ -15,6 +16,14 @@ dracula_text_input(
   size = "md",
   outline = FALSE,
   borderSize = "lg"
+)
+
+update_dracula_text_input(
+  inputId,
+  label = NULL,
+  value = NULL,
+  placeholder = NULL,
+  session = getDefaultReactiveDomain()
 )
 }
 \arguments{
@@ -37,9 +46,17 @@ option.}
 \item{outline}{Outline variant.}
 
 \item{borderSize}{Border size.}
+
+\item{session}{The \code{session} object passed to function given to
+\code{shinyServer}. Default is \code{getDefaultReactiveDomain()}.}
+}
+\value{
+Send message to JavaScript
 }
 \description{
 Dracula text input
+
+Update dracula text input
 }
 \examples{
 if (interactive()) {
@@ -56,6 +73,27 @@ if (interactive()) {
  server <- function(input, output, session) {
    observe({
     print(input$text)
+   })
+ }
+ shinyApp(ui, server)
+
+ # Update input #
+ ui <- dracula_page(
+  dracula_button("go", "Update text"),
+  dracula_text_input(
+    "text",
+    "My text input",
+    "Hello World"
+  )
+ )
+ server <- function(input, output, session) {
+   observeEvent(input$go, {
+     update_dracula_text_input(
+       "text",
+       label = "Plop",
+       value = "New value",
+       placeholder = "New placeholder"
+     )
    })
  }
  shinyApp(ui, server)
