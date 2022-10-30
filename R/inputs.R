@@ -149,11 +149,12 @@ dracula_checkbox <- function(inputId, label, value = FALSE, width = NULL,
 #' @note label does not work yet.
 #' @export
 #' @rdname checkbox-input
-update_dracula_checkbox <- function (
+update_dracula_checkbox <- function(
     inputId,
     label = NULL,
     value = NULL,
-    session = getDefaultReactiveDomain()) {
+    session = getDefaultReactiveDomain())
+{
   shiny::updateCheckboxInput(
     session = session,
     inputId = inputId,
@@ -230,12 +231,13 @@ dracula_switch <- function(inputId, label, value = FALSE,
 #' @note label does not work yet.
 #' @export
 #' @rdname switch-input
-update_dracula_switch <- function (
+update_dracula_switch <- function(
     inputId,
     label = NULL,
     value = NULL,
     placeholder = NULL,
-    session = getDefaultReactiveDomain()) {
+    session = getDefaultReactiveDomain())
+{
   update_dracula_checkbox(inputId, label, value, session)
 }
 
@@ -314,12 +316,13 @@ dracula_text_input <- function(inputId, label, value = "",
 #' @return Send message to JavaScript
 #' @export
 #' @rdname text-input
-update_dracula_text_input <- function (
+update_dracula_text_input <- function(
     inputId,
     label = NULL,
     value = NULL,
     placeholder = NULL,
-    session = getDefaultReactiveDomain()) {
+    session = getDefaultReactiveDomain())
+{
   shiny::updateTextInput(
     session = session,
     inputId = inputId,
@@ -336,6 +339,10 @@ update_dracula_text_input <- function (
 #' @param ghost Ghost style.
 #'
 #' @export
+#' @rdname action-button
+#' @seealso \url{https://ui.draculatheme.com/button} for all
+#' available options.
+#' @note icon does not work yet.
 #'
 #' @examples
 #' if (interactive()) {
@@ -352,6 +359,22 @@ update_dracula_text_input <- function (
 #'  server <- function(input, output, session) {
 #'    observe({
 #'     print(input$btn)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#'
+#'  # Update button #
+#'  ui <- dracula_page(
+#'   dracula_button("go", "Update text"),
+#'   dracula_button("button", "My button", color = "animated")
+#'  )
+#'  server <- function(input, output, session) {
+#'    observeEvent(input$go, {
+#'      update_dracula_button(
+#'        "button",
+#'        label = "New label",
+#'        icon = icon("folder")
+#'      )
 #'    })
 #'  }
 #'  shinyApp(ui, server)
@@ -394,10 +417,31 @@ dracula_button <- function(inputId, label, icon = NULL,
 
   tags$button(
     id = inputId,
-    icon = icon,
+    icon,
     class = btn_cl,
     label,
     disabled = if (disabled) ""
+  )
+}
+
+#' Update dracula action button
+#'
+#' @inheritParams shiny::updateActionButton
+#'
+#' @return Send message to JavaScript
+#' @export
+#' @rdname action-button
+update_dracula_button <- function(
+    inputId,
+    label = NULL,
+    icon = NULL,
+    session = getDefaultReactiveDomain()
+) {
+  shiny::updateActionButton(
+    session = session,
+    inputId = inputId,
+    label = label,
+    icon = icon
   )
 }
 

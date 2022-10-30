@@ -2,6 +2,7 @@
 % Please edit documentation in R/inputs.R
 \name{dracula_button}
 \alias{dracula_button}
+\alias{update_dracula_button}
 \title{Dracula action button}
 \usage{
 dracula_button(
@@ -16,6 +17,13 @@ dracula_button(
   outline = FALSE,
   ghost = FALSE,
   size = "md"
+)
+
+update_dracula_button(
+  inputId,
+  label = NULL,
+  icon = NULL,
+  session = getDefaultReactiveDomain()
 )
 }
 \arguments{
@@ -39,9 +47,20 @@ see \code{\link[shiny:validateCssUnit]{validateCssUnit()}}.}
 Default to FALSE.}
 
 \item{ghost}{Ghost style.}
+
+\item{session}{The \code{session} object passed to function given to
+\code{shinyServer}. Default is \code{getDefaultReactiveDomain()}.}
+}
+\value{
+Send message to JavaScript
 }
 \description{
 Dracula action button
+
+Update dracula action button
+}
+\note{
+icon does not work yet.
 }
 \examples{
 if (interactive()) {
@@ -60,5 +79,25 @@ if (interactive()) {
    })
  }
  shinyApp(ui, server)
+
+ # Update button #
+ ui <- dracula_page(
+  dracula_button("go", "Update text"),
+  dracula_button("button", "My button", color = "animated")
+ )
+ server <- function(input, output, session) {
+   observeEvent(input$go, {
+     update_dracula_button(
+       "button",
+       label = "New label",
+       icon = icon("folder")
+     )
+   })
+ }
+ shinyApp(ui, server)
 }
+}
+\seealso{
+\url{https://ui.draculatheme.com/button} for all
+available options.
 }
