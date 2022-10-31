@@ -41,6 +41,45 @@ var setThumbValue = (el, value, min, max) => {
   $("#" + el.id + "-range-value").css({left: `calc(${newValue}% + (${newPosition}px))`});
 };
 
+// srcjs/utils.js
+var updateLabel = (labelTxt, labelNode) => {
+  if (typeof labelTxt === "undefined")
+    return;
+  if (labelNode.length !== 1) {
+    throw new Error("labelNode must be of length 1");
+  }
+  var emptyLabel = $.isArray(labelTxt) && labelTxt.length === 0;
+  if (emptyLabel) {
+    labelNode.addClass("shiny-label-null");
+  } else {
+    labelNode.text(labelTxt);
+    labelNode.removeClass("shiny-label-null");
+  }
+};
+var escapeJQuery = (val) => {
+  return val.replace(/([!"#$%&'()*+,.\/:;<=>?@\[\\\]^`{|}~])/g, "\\$1");
+};
+
+// srcjs/custom-radio-binding.js
+$(document).ready(function() {
+  $.extend(Shiny.inputBindings.bindingNames["shiny.radioInput"].binding, {
+    receiveMessage: function(el, data) {
+      var $el = $(el);
+      if (data.hasOwnProperty("options")) {
+        $el.find("div.drac-box").remove();
+        $el.append(data.options);
+      }
+      if (data.hasOwnProperty("value"))
+        this.setValue(el, data.value);
+      updateLabel(data.label, this._getLabelNode(el));
+      $(el).trigger("change");
+    },
+    _getLabelNode: function(el) {
+      return $(el).parent().find('label[for="' + escapeJQuery(el.id) + '"]');
+    }
+  });
+});
+
 // srcjs/main.js
 $(function() {
   $(".drac-tab").on("click", function() {

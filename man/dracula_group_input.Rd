@@ -60,4 +60,7 @@ of just simple text. See Examples.}
 \description{
 Internal to create radios and checkboxgroup
 }
+\note{
+inline is not yet handled.
+}
 \keyword{internal}

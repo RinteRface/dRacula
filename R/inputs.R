@@ -734,6 +734,8 @@ update_dracula_select <- function(
 #' @inheritParams shiny::radioButtons
 #' @inheritParams dracula_input
 #'
+#' @note inline is not yet handled.
+#'
 #' @keywords internal
 dracula_group_input <- function(
     inputId,
@@ -823,6 +825,7 @@ dracula_group_input <- function(
 #'
 #' @seealso \url{https://ui.draculatheme.com/radio}.
 #' @export
+#' @rdname dracula-radio
 #'
 #' @examples
 #' if (interactive()) {
@@ -838,6 +841,27 @@ dracula_group_input <- function(
 #'  server <- function(input, output, session) {
 #'    observe({
 #'     print(input$radio)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#'
+#'  # Update radio #
+#'  ui <- dracula_page(
+#'   dracula_button("go", "Update radio"),
+#'   dracula_radio(
+#'     "radio",
+#'     "My radio input",
+#'     colnames(mtcars)
+#'   )
+#'  )
+#'  server <- function(input, output, session) {
+#'    observeEvent(input$go, {
+#'      update_dracula_radio(
+#'        "radio",
+#'        label = "New label",
+#'        choices = colnames(iris),
+#'        selected = colnames(iris)[2]
+#'      )
 #'    })
 #'  }
 #'  shinyApp(ui, server)
@@ -871,6 +895,47 @@ dracula_radio <- function(
     size,
     disabled
   )
+}
+
+#' Update dracula radio input
+#'
+#' @inheritParams shiny::updateRadioButtons
+#'
+#' @return Send message to JavaScript
+#' @export
+#' @rdname dracula-radio
+update_dracula_radio <- function(
+    inputId,
+    label = NULL,
+    choices = NULL,
+    selected = NULL,
+    inline = FALSE,
+    choiceNames = NULL,
+    choiceValues = NULL,
+    session = getDefaultReactiveDomain()
+) {
+  options <- tagQuery(dracula_group_input(
+    inputId,
+    label,
+    choices,
+    selected,
+    inline,
+    width = NULL,
+    choiceNames,
+    choiceValues,
+    type = "radio"
+  ))$
+    find(".drac-box")$
+    selectedTags()
+
+  message <- dropNulls(
+    list(
+      label = label,
+      options = as.character(options),
+      value = selected
+    )
+  )
+  session$sendInputMessage(inputId, message)
 }
 
 #' Dracula checkbox group

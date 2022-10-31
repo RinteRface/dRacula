@@ -2,6 +2,7 @@
 % Please edit documentation in R/inputs.R
 \name{dracula_radio}
 \alias{dracula_radio}
+\alias{update_dracula_radio}
 \title{Dracula radio button}
 \usage{
 dracula_radio(
@@ -17,6 +18,17 @@ dracula_radio(
   textColor = "white",
   size = "xs",
   disabled = FALSE
+)
+
+update_dracula_radio(
+  inputId,
+  label = NULL,
+  choices = NULL,
+  selected = NULL,
+  inline = FALSE,
+  choiceNames = NULL,
+  choiceValues = NULL,
+  session = getDefaultReactiveDomain()
 )
 }
 \arguments{
@@ -53,9 +65,17 @@ of just simple text. See Examples.}
 \item{textColor}{Text color.}
 
 \item{size}{Input size.}
+
+\item{session}{The \code{session} object passed to function given to
+\code{shinyServer}. Default is \code{getDefaultReactiveDomain()}.}
+}
+\value{
+Send message to JavaScript
 }
 \description{
 Dracula radio button
+
+Update dracula radio input
 }
 \examples{
 if (interactive()) {
@@ -71,6 +91,27 @@ if (interactive()) {
  server <- function(input, output, session) {
    observe({
     print(input$radio)
+   })
+ }
+ shinyApp(ui, server)
+
+ # Update radio #
+ ui <- dracula_page(
+  dracula_button("go", "Update radio"),
+  dracula_radio(
+    "radio",
+    "My radio input",
+    colnames(mtcars)
+  )
+ )
+ server <- function(input, output, session) {
+   observeEvent(input$go, {
+     update_dracula_radio(
+       "radio",
+       label = "New label",
+       choices = colnames(iris),
+       selected = colnames(iris)[2]
+     )
    })
  }
  shinyApp(ui, server)
