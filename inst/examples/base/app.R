@@ -5,20 +5,18 @@ addResourcePath("www", system.file("dracula-images", package = "dRacula"))
 
 ui <- dracula_page(
   dracula_tabs(
+    selected = "Inputs",
+    color = "green",
+    id = "tabs",
     dracula_tab(
       "Components",
-      dracula_heading("Hello World", color = "cyan-green"),
+      dracula_heading("Cards", color = "pink-purple"),
       fluidRow(
         column(
           6,
           dracula_card(
             dracula_p(
-              "Dracula is an 1897 Gothic horror novel by Irish author Bram Stoker. It
-              introduced the character of Count Dracula and established many conventions
-              of subsequent vampire fantasy. The novel tells the story of Dracula's
-              attempt to move from Transylvania to England so that he may find new blood
-              and spread the undead curse, and of the battle between Dracula and Professor
-              Abraham Van Helsing.",
+              "Dracula is an 1897 Gothic horror novel by Irish author Bram Stoker.",
               color = "black-secondary",
               weight = "bold",
               size = "lg",
@@ -29,14 +27,44 @@ ui <- dracula_page(
         column(
           6,
           dracula_card(
-            "My second card",
+            "Secondary outline card",
             color = "yellow",
             borderColor = "yellow",
             outline = TRUE
           )
         )
       ),
+      fluidRow(
+        column(
+          6,
+          dracula_card(
+            color = "cyan-green",
+            dracula_p(
+              "Gradient background card.",
+              color = "black-secondary",
+              weight = "bold",
+              size = "lg",
+              lineHeight = "xs"
+            )
+          )
+        ),
+        column(
+          6,
+          dracula_card(
+            color = "animated",
+            rounded = "sm",
+            dracula_p(
+              "Animated background card with small rounded borders.",
+              color = "black-secondary",
+              weight = "bold",
+              size = "lg",
+              lineHeight = "xs"
+            )
+          )
+        )
+      ),
       dracula_divider(),
+      dracula_heading("Avatars", color = "pink-purple"),
       fluidRow(
         dracula_avatar(
           "www/045-dracula.svg",
@@ -48,6 +76,7 @@ ui <- dracula_page(
         )
       ),
       dracula_divider(),
+      dracula_heading("Badges", color = "pink-purple"),
       fluidRow(
         column(
           6,
@@ -91,14 +120,15 @@ ui <- dracula_page(
         "radio",
         "My radio input",
         color = "pink",
-        textColor = "yellow",
+        textColor = "yellow-pink",
         colnames(mtcars)
       ),
       dracula_checkbox_group(
         "checkbox_group",
         "My checkbox group input",
         selected = c("weight", "Chick"),
-        colnames(ChickWeight)
+        colnames(ChickWeight),
+        textColor = "purple-cyan"
       ),
       dracula_select(
         "select",
@@ -117,10 +147,7 @@ ui <- dracula_page(
         color = "cyan"
       )
     ),
-    dracula_tab("tab 3"),
-    selected = "Inputs",
-    color = "green"#,
-    #id = "tabs"
+    dracula_tab("tab 3")
   )
 )
 
@@ -137,6 +164,7 @@ server <- function(input, output, session) {
     print(input$select)
     print(input$switch)
     print(input$range)
+    print(input$tabs)
   })
 }
 
