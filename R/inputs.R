@@ -106,7 +106,7 @@ dracula_input <- function(
 #'
 #'  # Update checkbox #
 #'  ui <- dracula_page(
-#'   dracula_button("go", "Update text"),
+#'   dracula_button("go", "Update checkbox"),
 #'   dracula_checkbox("checkbox", "My checkbox", color = "pink")
 #'  )
 #'  server <- function(input, output, session) {
@@ -191,7 +191,7 @@ update_dracula_checkbox <- function(
 #'
 #'  # Update switch #
 #'  ui <- dracula_page(
-#'   dracula_button("go", "Update text"),
+#'   dracula_button("go", "Update switch"),
 #'   dracula_switch("checkbox", "My checkbox", color = "pink")
 #'  )
 #'  server <- function(input, output, session) {
@@ -365,7 +365,7 @@ update_dracula_text_input <- function(
 #'
 #'  # Update button #
 #'  ui <- dracula_page(
-#'   dracula_button("go", "Update text"),
+#'   dracula_button("go", "Update button"),
 #'   dracula_button("button", "My button", color = "animated")
 #'  )
 #'  server <- function(input, output, session) {
@@ -478,7 +478,7 @@ update_dracula_button <- function(
 #'
 #'  # Update numeric #
 #'  ui <- dracula_page(
-#'   dracula_button("go", "Update text"),
+#'   dracula_button("go", "Update numeric"),
 #'   dracula_numeric(
 #'     "numeric",
 #'     "My numeric input",
@@ -593,6 +593,7 @@ dracula_select_arrow <- function(color) {
 #'
 #' @seealso \url{https://ui.draculatheme.com/select}.
 #' @export
+#' @rdname select-input
 #'
 #' @examples
 #' if (interactive()) {
@@ -608,6 +609,27 @@ dracula_select_arrow <- function(color) {
 #'  server <- function(input, output, session) {
 #'    observe({
 #'     print(input$select)
+#'    })
+#'  }
+#'  shinyApp(ui, server)
+#'
+#'  # Update select #
+#'  ui <- dracula_page(
+#'   dracula_button("go", "Update select"),
+#'   dracula_select(
+#'     "select",
+#'     "My select input",
+#'     colnames(mtcars)
+#'   )
+#'  )
+#'  server <- function(input, output, session) {
+#'    observeEvent(input$go, {
+#'      update_dracula_select(
+#'        "select",
+#'        label = "New label",
+#'        choices = colnames(iris),
+#'        selected = colnames(iris)[2]
+#'      )
 #'    })
 #'  }
 #'  shinyApp(ui, server)
@@ -679,6 +701,29 @@ dracula_select <- function(
     class = "drac-box",
     new_label,
     tagList(select_tag)
+  )
+}
+
+#' Update dracula select input
+#'
+#' @inheritParams shiny::updateSelectInput
+#'
+#' @return Send message to JavaScript
+#' @export
+#' @rdname select-input
+update_dracula_select <- function(
+    inputId,
+    label = NULL,
+    choices = NULL,
+    selected = NULL,
+    session = getDefaultReactiveDomain()
+) {
+  shiny::updateSelectInput(
+    session = session,
+    inputId = inputId,
+    label = label,
+    choices = choices,
+    selected = selected
   )
 }
 

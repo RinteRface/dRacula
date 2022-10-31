@@ -65,7 +65,7 @@ if (interactive()) {
 
  # Update switch #
  ui <- dracula_page(
-  dracula_button("go", "Update text"),
+  dracula_button("go", "Update switch"),
   dracula_switch("checkbox", "My checkbox", color = "pink")
  )
  server <- function(input, output, session) {

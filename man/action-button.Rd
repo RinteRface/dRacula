@@ -82,7 +82,7 @@ if (interactive()) {
 
  # Update button #
  ui <- dracula_page(
-  dracula_button("go", "Update text"),
+  dracula_button("go", "Update button"),
   dracula_button("button", "My button", color = "animated")
  )
  server <- function(input, output, session) {

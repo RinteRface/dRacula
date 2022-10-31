@@ -81,7 +81,7 @@ if (interactive()) {
 
  # Update numeric #
  ui <- dracula_page(
-  dracula_button("go", "Update text"),
+  dracula_button("go", "Update numeric"),
   dracula_numeric(
     "numeric",
     "My numeric input",

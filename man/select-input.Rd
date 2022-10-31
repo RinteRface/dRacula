@@ -2,6 +2,7 @@
 % Please edit documentation in R/inputs.R
 \name{dracula_select}
 \alias{dracula_select}
+\alias{update_dracula_select}
 \title{Dracula select input}
 \usage{
 dracula_select(
@@ -17,6 +18,14 @@ dracula_select(
   size = "md",
   disabled = FALSE,
   outline = FALSE
+)
+
+update_dracula_select(
+  inputId,
+  label = NULL,
+  choices = NULL,
+  selected = NULL,
+  session = getDefaultReactiveDomain()
 )
 }
 \arguments{
@@ -52,9 +61,17 @@ Normally, when \code{multiple=FALSE}, a select input will be a drop-down list,
 but when \code{size} is set, it will be a box instead.}
 
 \item{outline}{Outline variant.}
+
+\item{session}{The \code{session} object passed to function given to
+\code{shinyServer}. Default is \code{getDefaultReactiveDomain()}.}
+}
+\value{
+Send message to JavaScript
 }
 \description{
 Dracula select input
+
+Update dracula select input
 }
 \examples{
 if (interactive()) {
@@ -70,6 +87,27 @@ if (interactive()) {
  server <- function(input, output, session) {
    observe({
     print(input$select)
+   })
+ }
+ shinyApp(ui, server)
+
+ # Update select #
+ ui <- dracula_page(
+  dracula_button("go", "Update select"),
+  dracula_select(
+    "select",
+    "My select input",
+    colnames(mtcars)
+  )
+ )
+ server <- function(input, output, session) {
+   observeEvent(input$go, {
+     update_dracula_select(
+       "select",
+       label = "New label",
+       choices = colnames(iris),
+       selected = colnames(iris)[2]
+     )
    })
  }
  shinyApp(ui, server)
