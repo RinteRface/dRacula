@@ -77,19 +77,19 @@ ui <- dracula_page(
       ),
       dracula_divider(),
       dracula_heading("Badges", color = "pink-purple"),
+      br(),
+      lapply(seq_along(dracula_extended_colors)[-c(14:16)], function(i) {
+        tags$div(
+          class = "drac-box drac-d-inline-block drac-p-sm drac-m-sm",
+          dracula_badge(dracula_extended_colors[[i]], color = dracula_extended_colors[[i]])
+        )
+      }),
       fluidRow(
-        column(
-          6,
-          dracula_badge("Hello World", color = "red"),
-        ),
-        column(
-          6,
-          dracula_badge(
-            "1",
-            color = "red",
-            textColor = "red",
-            outline = TRUE
-          )
+        dracula_badge(
+          "Outline",
+          color = "red",
+          textColor = "red",
+          outline = TRUE
         )
       ),
       dracula_divider(),

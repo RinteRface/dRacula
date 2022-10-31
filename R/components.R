@@ -120,20 +120,29 @@ dracula_card <- function(
 #' }
 dracula_badge <- function(..., color = "purple", textColor = "black",
                           outline = FALSE) {
+
   badge_tag <- tags$span(
-    class = sprintf(
-      "drac-badge drac-text-%s drac-m-sm drac-p-sm",
-      textColor
-    ),
-    ...
+    class = "drac-badge drac-m-sm drac-p-sm",
+    # necessary to fix a bug in dracula UI
+    # .drac-badge {
+    #   /* background-color: var(--accentColor); ## WRONG!!! ##
+    style = if (!outline) sprintf("background-color: var(--%s);", color),
+    tags$span(
+      class = sprintf(
+        "drac-text drac-line-height drac-text-%s",
+        textColor
+      ),
+      ...
+    )
   )
 
   if (outline) {
     tagQuery(badge_tag)$
       addClass(
         sprintf(
-          "drac-badge-subtle drac-bg-%s-transparent",
-          color
+          "drac-badge-subtle drac-bg-%s-transparent drac-text-%s",
+          color,
+          textColor
         )
       )$
       allTags()
