@@ -2,6 +2,7 @@
 % Please edit documentation in R/inputs.R
 \name{dracula_checkbox_group}
 \alias{dracula_checkbox_group}
+\alias{update_dracula_checkbox_group}
 \title{Dracula checkbox group}
 \usage{
 dracula_checkbox_group(
@@ -17,6 +18,17 @@ dracula_checkbox_group(
   textColor = "white",
   size = "xs",
   disabled = FALSE
+)
+
+update_dracula_checkbox_group(
+  inputId,
+  label = NULL,
+  choices = NULL,
+  selected = NULL,
+  inline = FALSE,
+  choiceNames = NULL,
+  choiceValues = NULL,
+  session = getDefaultReactiveDomain()
 )
 }
 \arguments{
@@ -53,9 +65,17 @@ of just simple text. See Examples.}
 \item{textColor}{Text color.}
 
 \item{size}{Input size.}
+
+\item{session}{The \code{session} object passed to function given to
+\code{shinyServer}. Default is \code{getDefaultReactiveDomain()}.}
+}
+\value{
+Send message to JavaScript
 }
 \description{
 Dracula checkbox group
+
+Update dracula checkbox group input
 }
 \examples{
 if (interactive()) {

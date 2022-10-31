@@ -2,11 +2,7 @@ import { updateLabel } from './utils.js';
 import { escapeJQuery } from './utils.js';
 
 $( document ).ready(function() {
- $.extend(
-  Shiny
-    .inputBindings
-    .bindingNames['shiny.radioInput']
-    .binding, {
+ const customBindingMethods = {
     receiveMessage: function(el, data) {
       var $el = $(el);
       // This will replace all the options
@@ -27,5 +23,11 @@ $( document ).ready(function() {
     _getLabelNode: function(el) {
       return $(el).parent().find('label[for="' + escapeJQuery(el.id) + '"]');
     }
-  });
+  };
+ $.extend(
+  Shiny.inputBindings.bindingNames['shiny.radioInput'].binding, customBindingMethods
+ );
+ $.extend(
+  Shiny.inputBindings.bindingNames['shiny.checkboxGroupInput'].binding, customBindingMethods
+ );
 });

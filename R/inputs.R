@@ -944,6 +944,7 @@ update_dracula_radio <- function(
 #'
 #' @seealso \url{https://ui.draculatheme.com/checkbox}.
 #' @export
+#' @rdname dracula-checkbox-group
 #'
 #' @examples
 #' if (interactive()) {
@@ -992,6 +993,47 @@ dracula_checkbox_group <- function(
     size,
     disabled
   )
+}
+
+#' Update dracula checkbox group input
+#'
+#' @inheritParams shiny::updateRadioButtons
+#'
+#' @return Send message to JavaScript
+#' @export
+#' @rdname dracula-checkbox-group
+update_dracula_checkbox_group <- function(
+    inputId,
+    label = NULL,
+    choices = NULL,
+    selected = NULL,
+    inline = FALSE,
+    choiceNames = NULL,
+    choiceValues = NULL,
+    session = getDefaultReactiveDomain()
+) {
+  options <- tagQuery(dracula_group_input(
+    inputId,
+    label,
+    choices,
+    selected,
+    inline,
+    width = NULL,
+    choiceNames,
+    choiceValues,
+    type = "checkbox"
+  ))$
+    find(".drac-box")$
+    selectedTags()
+
+  message <- dropNulls(
+    list(
+      label = label,
+      options = as.character(options),
+      value = selected
+    )
+  )
+  session$sendInputMessage(inputId, message)
 }
 
 #' Dracula range input

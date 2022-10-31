@@ -62,7 +62,7 @@ var escapeJQuery = (val) => {
 
 // srcjs/custom-radio-binding.js
 $(document).ready(function() {
-  $.extend(Shiny.inputBindings.bindingNames["shiny.radioInput"].binding, {
+  const customBindingMethods = {
     receiveMessage: function(el, data) {
       var $el = $(el);
       if (data.hasOwnProperty("options")) {
@@ -77,7 +77,9 @@ $(document).ready(function() {
     _getLabelNode: function(el) {
       return $(el).parent().find('label[for="' + escapeJQuery(el.id) + '"]');
     }
-  });
+  };
+  $.extend(Shiny.inputBindings.bindingNames["shiny.radioInput"].binding, customBindingMethods);
+  $.extend(Shiny.inputBindings.bindingNames["shiny.checkboxGroupInput"].binding, customBindingMethods);
 });
 
 // srcjs/main.js
