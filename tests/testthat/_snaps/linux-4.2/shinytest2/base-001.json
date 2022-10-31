@@ -1,0 +1,22 @@
+{
+  "input": {
+    "btn": 0,
+    "checkbox": true,
+    "checkbox_group": [
+      "weight",
+      "Chick"
+    ],
+    "mytext": "",
+    "numeric": 200,
+    "radio": "mpg",
+    "range": 50,
+    "select": "mpg",
+    "switch": false
+  },
+  "output": {
+
+  },
+  "export": {
+
+  }
+}

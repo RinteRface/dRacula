@@ -1,0 +1,23 @@
+{
+  "input": {
+    "btn": 1,
+    "checkbox": true,
+    "checkbox_group": [
+      "weight",
+      "Time",
+      "Chick"
+    ],
+    "mytext": "Blabla",
+    "numeric": 100,
+    "radio": "hp",
+    "range": 50,
+    "select": "hp",
+    "switch": true
+  },
+  "output": {
+
+  },
+  "export": {
+
+  }
+}
