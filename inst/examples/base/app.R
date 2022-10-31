@@ -91,11 +91,30 @@ ui <- dracula_page(
             outline = TRUE
           )
         )
+      ),
+      dracula_divider(),
+      dracula_heading("Lists", color = "pink-purple"),
+      dracula_list(
+        ordered = TRUE,
+        color = "yellow",
+        dracula_list_item("Item 1"),
+        dracula_list_item("Item 3"),
+        dracula_list_item("Item 2")
+      ),
+      dracula_list(
+        color = "red",
+        dracula_list_item("Item 1"),
+        dracula_list_item("Item 3"),
+        dracula_list_item("Item 2")
       )
     ),
     dracula_tab(
       "Inputs",
+      dracula_heading("Checkbox input", color = "yellow-pink"),
       dracula_checkbox("checkbox", "My checkbox", color = "pink"),
+      dracula_switch("switch", "My switch input", color = "pink"),
+      dracula_divider(),
+      dracula_heading("Numeric input", color = "yellow-pink"),
       dracula_numeric(
         "numeric",
         "My numeric input",
@@ -105,17 +124,23 @@ ui <- dracula_page(
         step = 1,
         color = "orange"
       ),
+      dracula_divider(),
+      dracula_heading("Text input", color = "yellow-pink"),
       dracula_text_input(
         "mytext",
         "Text input",
         placeholder = "Enter some text here!",
         color = "green"
       ),
+      dracula_divider(),
+      dracula_heading("Action button", color = "yellow-pink"),
       dracula_button(
         "btn",
         "My action button",
         color = "animated"
       ),
+      dracula_divider(),
+      dracula_heading("Radio button", color = "yellow-pink"),
       dracula_radio(
         "radio",
         "My radio input",
@@ -123,6 +148,8 @@ ui <- dracula_page(
         textColor = "yellow-pink",
         colnames(mtcars)
       ),
+      dracula_divider(),
+      dracula_heading("Checkbox group", color = "yellow-pink"),
       dracula_checkbox_group(
         "checkbox_group",
         "My checkbox group input",
@@ -130,13 +157,16 @@ ui <- dracula_page(
         colnames(ChickWeight),
         textColor = "purple-cyan"
       ),
+      dracula_divider(),
+      dracula_heading("Select input", color = "yellow-pink"),
       dracula_select(
         "select",
         "My select input",
         colnames(mtcars),
         color = "purple"
       ),
-      dracula_switch("switch", "My switch input", color = "pink"),
+      dracula_divider(),
+      dracula_heading("Slider input (WIP)", color = "yellow-pink"),
       dracula_range(
         "range",
         "My range input",

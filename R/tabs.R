@@ -19,6 +19,11 @@ dracula_tabs <- function(..., id = NULL, selected = NULL, color = "white") {
 
   tabset_tag <- tagQuery(htmltools:::tagify(tabset_tag))$
     find("ul")$
+    filter(function(x, i) {
+      # Required not to select drac-list since they also are ul elements
+      # tagQuery does not allow the :not select yet so no choice ...
+      !tagHasAttribute(x, "drac-list")
+    })$
     removeClass("nav-tabs")$
     addClass(sprintf("drac-tabs drac-tabs-%s", color))$
     find("li")$

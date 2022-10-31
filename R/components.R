@@ -235,6 +235,8 @@ dracula_avatar <- function(src, color = "purple",
 #' }
 dracula_list <- function(..., ordered = FALSE, color = NULL) {
 
+  list_func <- if (ordered) tags$ol else tags$ul
+
   list_cl <- "drac-list"
   if (!is.null(color)) {
     list_cl <- sprintf("%s drac-list-%s", list_cl, color)
@@ -246,8 +248,9 @@ dracula_list <- function(..., ordered = FALSE, color = NULL) {
 
   tags$div(
     class = "drac-box",
-    tags$ul(
+    list_func(
       class = list_cl,
+      `drac-list` = NA, # required to avoid an issue with htmtools and tabs.
       ...
     )
   )
