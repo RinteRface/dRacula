@@ -1,7 +1,7 @@
 library(shiny)
 library(dRacula)
 
-addResourcePath("www", "www")
+addResourcePath("www", system.file("dracula-images", package = "dRacula"))
 
 ui <- dracula_page(
   dracula_tabs(

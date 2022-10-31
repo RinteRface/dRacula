@@ -206,3 +206,61 @@ dracula_avatar <- function(src, color = "purple",
   )
 }
 
+#' Dracula list container
+#'
+#' @param ... Slot for \link{dracula_list_item}.
+#' @param ordered Whether to add numbers. Default to FALSE.
+#' @param color Items color.
+#' See \url{https://ui.draculatheme.com/orderedlist#properties}.
+#'
+#' @return An HTML list.
+#' @export
+#' @rdname drac-list
+#'
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   library(dRacula)
+#'   ui <- dracula_page(
+#'     dracula_list(
+#'       ordered = TRUE,
+#'       color = "yellow",
+#'       dracula_list_item("Item 1"),
+#'       dracula_list_item("Item 3"),
+#'       dracula_list_item("Item 2")
+#'     )
+#'   )
+#'   server <- function(input, output, session) {}
+#'   shinyApp(ui, server)
+#' }
+dracula_list <- function(..., ordered = FALSE, color = NULL) {
+
+  list_cl <- "drac-list"
+  if (!is.null(color)) {
+    list_cl <- sprintf("%s drac-list-%s", list_cl, color)
+  }
+
+  if (ordered) {
+    list_cl <- sprintf("%s drac-list-ordered", list_cl)
+  }
+
+  tags$div(
+    class = "drac-box",
+    tags$ul(
+      class = list_cl,
+      ...
+    )
+  )
+}
+
+#' Dracula list item
+#'
+#' @param ... Any text content.
+#'
+#' @return A li element.
+#' @export
+#' @rdname drac-list
+dracula_list_item <- function(...) {
+  tags$li(class = "drac-text drac-text-white", ...)
+}
+
